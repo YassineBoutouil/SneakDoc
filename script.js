@@ -27,6 +27,7 @@ $(document).ready(function() {
       case 2:
         console.log("has seller")
         $("#nav_admin").closest('.nav-item').addClass("d_none")
+        $("#nav_sell").closest('.nav-item').removeClass("d_none").addClass("d_true")
         $("#nav_sign_in").closest('.nav-item').addClass("d_none")
         $("#nav_sign_up").closest('.nav-item').addClass("d_none")
         break;
@@ -34,6 +35,8 @@ $(document).ready(function() {
         console.log("has admin")
         $("#nav_sign_in").closest('.nav-item').addClass("d_none")
         $("#nav_sign_up").closest('.nav-item').addClass("d_none")
+        $("#nav_sell").closest('.nav-item').removeClass("d_none").addClass("d_true")
+        $("#nav_admin").closest('.nav-item').removeClass("d_none").addClass("d_true")
         break;
       default:
         console.log("has foreigner")
