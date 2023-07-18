@@ -115,8 +115,9 @@ $(document).ready(function() {
   const tshirtFilters = $('#tshirt-filters');
   tshirtFilters.hide();
   tshirtSizeFilters.hide();
+  $("#cart_payment").hide()
   categorieSelect.on('change', function() {
-    const selectedCategory = $(this).val();
+  const selectedCategory = $(this).val();
 
     
     if (selectedCategory === 'sneakers') {
@@ -180,5 +181,15 @@ $(document).ready(function() {
         updateQuantityPrice(quantity);
       }
     });
-  });
 
+
+    $("#cart_order_confirmation").on('click', function(){
+      $("#cart_payment").show()
+      $("#cart_cart").hide()
+    })
+
+    $(".return-order-button").on('click', function(){
+      $("#cart_payment").hide()
+      $("#cart_cart").show()
+    })
+  })

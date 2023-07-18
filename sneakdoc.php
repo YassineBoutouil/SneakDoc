@@ -19,7 +19,6 @@
       ini_set('display_errors', 1);
       ini_set('display_startup_errors', 1);
       error_reporting(E_ALL);
-      echo "test";
 
       // Database connection
       $user = 'root';
@@ -967,7 +966,9 @@
 
   <section id="cart" class="d_none two_parts overflow">
     <section id="cart_cart" class="cart_d_none two_parts overflow">
-
+          <center>
+            <input id="cart_order_confirmation"type="submit" name="sign_up_submit" value="Sign-Up" id="sign-up-submit">
+          </center>
     </section>
       <section id="cart_payment" class="cart_d_none two_parts overflow">
       <div class="payment-container">
@@ -993,8 +994,11 @@
           <label class="payment-label" for="payment-security-code">Code de sécurité:</label>
           <input class="payment-input" type="text" id="payment-security-code" name="payment-security-code">
 
-          <button type="submit" name="payment-submit">Payer</button>
+          <button  class="return-order-button" type="button">Go back</button>
+          <button  class="payment-button" type="submit" name="payment-submit">Payer</button>
         </form>
+
+
       </div>
     </section>
   </section>
