@@ -903,7 +903,7 @@
         </center>
       </form>
     </section>
-    <section id="sell_remove" class="sell_d_true">
+    <section id="sell_remove" class="sell_d_none">
       <?php
         if (isset($_POST['delete_submit'])) {
         $product_id = $_POST['product_id'];
