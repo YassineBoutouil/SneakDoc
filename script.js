@@ -221,5 +221,41 @@ $(document).ready(function() {
       }
     }
     
-    // Call the function to reset all cookies
-  })
+    })
+  
+    var selectedSizes = []; // Tableau pour stocker les tailles sélectionnées
+    var selectedTypes = []; // Tableau pour stocker les types sélectionnés
+
+    $('input[name="size"]').on('change', function() {
+      var sizeValue = $(this).val();
+
+      if ($(this).is(':checked')) {
+        selectedSizes.push(sizeValue);
+        console.log('Taille sélectionnée : ' + sizeValue);
+      } else {
+        var index = selectedSizes.indexOf(sizeValue);
+        if (index > -1) {
+          selectedSizes.splice(index, 1);
+          console.log('Taille décochée : ' + sizeValue);
+        }
+      }
+
+      console.log('Tailles sélectionnées :', selectedSizes);
+    });
+
+    $('input[name="type"]').on('change', function() {
+      var typeValue = $(this).val();
+
+      if ($(this).is(':checked')) {
+        selectedTypes.push(typeValue);
+        console.log('Type sélectionné : ' + typeValue);
+      } else {
+        var index = selectedTypes.indexOf(typeValue);
+        if (index > -1) {
+          selectedTypes.splice(index, 1);
+          console.log('Type décoché : ' + typeValue);
+        }
+      }
+
+      console.log('Types sélectionnés :', selectedTypes);
+});
