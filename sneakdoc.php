@@ -21,7 +21,7 @@
       error_reporting(E_ALL);
       echo "test";
 
-      // Database connexion
+      // Database connection
       $user = 'root';
       $password = '';
       $database = 'web_project';
@@ -103,7 +103,7 @@
             }
         } else {
             // User does not exist in the database
-            echo "Vous n'existez pas dans notre base de données, mais vous pouvez créer un compte en cliquant sur le bouton 'Sign Up !'";
+            echo "You don't exist in our database, but you can create an account by clicking on the 'Sign Up!' button.";
         }
       }
     
@@ -165,21 +165,21 @@
       if (isset($_POST['admin-addusersubmit'])) {
         $user_type = isset($_COOKIE['user_type']) ? $_COOKIE['user_type'] : '';
         if($user_type != 3){
-          $message = "You Have to be a admin to do that !";
+          $message = "You Have to be an admin to do that!";
           echo '<script type="text/javascript">window.alert("'.$message.'");</script>';
         }
         else{
           $mail = $_POST['admin-addid'];
           $password = $_POST['admin-addname'];
           
-          // Vérifiez si le mail est déjà utilisé
+          // Check if the email is already used
           $query = "SELECT * FROM `users` WHERE `Mail` = '$mail'";
           $result = $mysqli->query($query);
           
           if ($result->num_rows > 0) {
               echo "Mail already used.";
           } else {
-            // Insérer les informations de l'utilisateur dans la base de données
+            // Insert user information into the database
             $insertQuery = "INSERT INTO `users` (`Mail`, `Pwd`, `Telephone_Number`, `Address`, `City`, `Postal_Code`, `Country`, `User_Type`) 
                             VALUES ('$mail', '$password', 0, 'To fill', 'To fill', 'To fill', 'To fill', 1)";
             
@@ -214,7 +214,7 @@
         if ($mysqli->query($insertQuery)) {
             $productId = $mysqli->insert_id;
     
-            // Insérer les informations spécifiques au produit dans la table appropriée (t-shirt ou sneakers)
+            // Insert specific product information into the appropriate table (t-shirt or sneakers)
             if ($productCategory == 'T-shirt') {
                 $insertTshirtQuery = "INSERT INTO `tshirt` (`Size`, `Color`, `Product_Id`) 
                                       VALUES ('$productSize', '$productColor', '$productId')";
@@ -233,20 +233,20 @@
             if (isset($_FILES['product-image'])) {
                 $fileName = $_FILES['product-image']['name'];
                 $tempName = $_FILES['product-image']['tmp_name'];
-                $uploadDirectory = 'image/'; // Chemin du répertoire d'upload
+                $uploadDirectory = 'image/'; // Path to the upload directory
                 $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
                 $newFileName = uniqid() . '.' . $fileExtension;
                 $uploadPath = $uploadDirectory . $newFileName;
     
-                // Déplacer le fichier téléchargé vers le répertoire d'upload
+                // Move the uploaded file to the upload directory
                 if (move_uploaded_file($tempName, $uploadPath)) {
-                    // Enregistrer les informations de l'image dans la table "image" de la base de données
+                    // Save the image information in the "image" table of the database
                     $insertImageQuery = "INSERT INTO `image` (`Product_Id`, `File_Name`) VALUES ('$productId', '$newFileName')";
                     $mysqli->query($insertImageQuery);
-                    echo "Le fichier a été téléchargé et les informations ont été ajoutées avec succès.";
+                    echo "The file has been uploaded and the information has been added successfully.";
                 } 
                 else {
-                    echo "Une erreur s'est produite lors du téléchargement du fichier.";
+                    echo "An error occurred while uploading the file.";
                 }
             }
     
@@ -254,19 +254,19 @@
                 $insertAnchorQuery = "INSERT INTO `auctions` (`Categorie`, `Size`, `Color`, `Starting_Date`, `Finish_Date`, `Price`, `Product_Id`)
                                       VALUES ('$productCategory', '$productSize', '$productColor', NOW(), '$productEndDate', '$productPrice', '$productId')";
                 $mysqli->query($insertAnchorQuery);
-                echo "Le produit a été ajouté avec succès.";
+                echo "Product added successfully.";
             } elseif ($productSellType == 'Buy_Now') {
                 $insertBuyNowQuery = "INSERT INTO `buy_now` (`Categorie`, `Size`, `Color`, `Price`, `Product_Id`)
                                       VALUES ('$productCategory', '$productSize', '$productColor', '$productPrice', '$productId')";
                 $mysqli->query($insertBuyNowQuery);
-                echo "Le produit a été ajouté avec succès.";
+                echo "Product added successfully.";
             } elseif ($productSellType == 'Best_Offer') {
                 $insertBestOfferQuery = "INSERT INTO `best_offer` (`Categorie`, `Size`, `Color`, `Proposition_Price`, `Product_Id`)
                                         VALUES ('$productCategory', '$productSize', '$productColor', '$productPrice', '$productId')";
                 $mysqli->query($insertBestOfferQuery);
-                echo "Le produit a été ajouté avec succès.";
+                echo "Product added successfully.";
             } else {
-                echo "Erreur lors de l'ajout du produit.";
+                echo "Error!";
             }
         }
     }
@@ -280,27 +280,22 @@
 
       $user_id = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : '';
 
-      echo "USER ID FROM PAYMENT : " . $user_id;
+      echo "USER ID FROM PAYMENT: " . $user_id;
 
       $sql = "SELECT * FROM users WHERE User_Id = $user_id";
       echo $sql;
       $result = $mysqli->query($sql);
 
       if ($result->num_rows > 0) {
-        // Utilisateur trouvé dans la base de données
         $row = $result->fetch_assoc();
 
-        // Comparaison des informations de paiement
         if ($row['Payment_Type'] === $paymentType && $row['Card_Number'] === $cardNumber && $row['Card_Name'] === $cardName && $row['Card_Expiration_Date'] === $cardExpiration && $row['Security_Code'] === $securityCode) {
-            // Informations de paiement valides, effectuez les actions appropriées (par exemple, effectuez le paiement)
-            echo "Paiement réussi !";
+            echo "Payment successful!";
         } else {
-            // Informations de paiement invalides
-            echo "Informations de paiement incorrectes. Veuillez vérifier à nouveau.";
+            echo "Incorrect payment information. Please check again.";
         }
     } else {
-        // Utilisateur non trouvé dans la base de données
-        echo "Utilisateur non autorisé à effectuer le paiement.";
+        echo "User not authorized to make payment.";
     }
   
       
