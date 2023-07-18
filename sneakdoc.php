@@ -42,6 +42,7 @@
           // Parcourir les résultats de la requête
         while ($row = $result->fetch_assoc()) {
             // Accéder aux valeurs des colonnes
+            $seller_id = $row["User_Id"];
             $best_offer_id = $row["Best_Offer_Id"];
             $categorie = $row["Categorie"];
             $size = $row["Size"];
@@ -52,18 +53,21 @@
             $product_description = $row["Product_Description"];
             $product_title = $row["Product_Title"];
             $type = $row["Type"];
-            $file_name = $row["FIle_Name"];
+            $file_name = $row["File_Name"];
+
+            echo $file_name;
+            echo $product_description;
 
             // Faire quelque chose avec les valeurs récupérées
             // Par exemple, les afficher à l'écran
             echo '<div class="product-card">';
             echo '<p class="product-seller-id">ID du vendeur: ' . $seller_id . '</p>';
             echo '<div class="product-image">';
-            echo '<img src="' . $product_image . '" alt="Product Image">';
+            echo '<img src=image/"' . $file_name . '" alt="'.$file_name.'">';
             echo '</div>';
             echo '<div class="product-details">';
             echo '<h2 class="product-title">' . $product_title . '</h2>';
-            echo '<p class="product-code">Code du produit: ' . $product_code . '</p>';
+            echo '<p class="product-code">Code du produit: ' . $product_id . '</p>';
             echo '<div class="quantity-section">';
             echo '<button class="quantity-button minus">-</button>';
             echo '<span class="quantity">1</span>';
@@ -71,7 +75,7 @@
             echo '</div>';
             echo '<h5 class="product-price">';
             echo '<span class="price-label">Prix initial:</span>';
-            echo '<span class="initial-price">' . $initial_price . '</span>';
+            echo '<span class="initial-price">' . $proposition_price . '</span>';
             echo '</h5>';
             echo '<div class="negotiation-section">';
             echo '<label for="negotiation-input">Négocier le prix:</label>';
