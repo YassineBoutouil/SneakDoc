@@ -140,40 +140,40 @@ margin-bottom: 5px;
 }
 
 .product-code {
-font-size: 14px;
-margin-bottom: 5px;
+    font-size: 14px;
+    margin-bottom: 5px;
 }
 
 .quantity-section {
-margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .quantity-button {
-width: 30px;
-height: 30px;
-font-size: 16px;
-background-color: #f2f2f2;
-border: none;
-border-radius: 5px;
-cursor: pointer;
-margin: 0 5px;
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    background-color: #f2f2f2;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 5px;
 }
 
 .quantity {
-font-size: 16px;
-font-weight: bold;
+    font-size: 16px;
+    font-weight: bold;
 }
 
-.add-to-cart-button, .negotiation-button, .payment-button, .return-order-button{
-width: 100%;
-padding: 10px;
-font-size: 14px;
-font-weight: bold;
-background-color: #ff0000;
-color: #ffffff;
-border: none;
-border-radius: 5px;
-cursor: pointer;
+.add-to-cart-button, .negotiation-button, .payment-button, .return-order-button, #cart_order_confirmation{
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #ff0000;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .negotiation-button {
