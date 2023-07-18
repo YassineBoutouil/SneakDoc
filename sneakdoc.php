@@ -59,6 +59,8 @@
           }
       }
 
+
+      /**** */
       if (isset($_POST['login-submit'])) {
         $email = $_POST['login-mail-input'];
         $password = $_POST['login-pwd-input'];
