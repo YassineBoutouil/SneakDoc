@@ -19,7 +19,6 @@
       ini_set('display_errors', 1);
       ini_set('display_startup_errors', 1);
       error_reporting(E_ALL);
-      echo "test";
 
       // Database connection
       $user = 'root';
@@ -605,7 +604,7 @@
     </section>
 <!-- Buy -->
 <section id="buy" class="d_true two_parts">
-        <section class="containers d_none ">
+        <section class="containers d_none">
           <section class="aside">
             <?php
             error_reporting(E_ERROR | E_PARSE);
@@ -706,7 +705,7 @@
 
             
           </section>
-          <section class="main">
+          <section class="main overflow">
           <div>
             <ul class="nav nav-pills nav-fill gap-5 p-1 small  rounded-2" id="pillNav2" role="tablist" style="--bs-nav-link-color: var(--black); --bs-nav-pills-link-active-color: var(--white-cream); --bs-nav-pills-link-active-bg: var(--red--pale);">
                 <li class="nav-item" role="presentation">
@@ -834,13 +833,13 @@
       </section>
 
 <!-- Sell -->
-  <section id="sell" class="d_none two_parts">
-    <ul class="nav nav-pills nav-fill gap-2 p-1 small rounded-5" id="pillNav2" role="tablist" style="--bs-nav-link-color: var(--black); --bs-nav-pills-link-active-color: var(--white-cream); --bs-nav-pills-link-active-bg: var(--red--pale);">
+  <section id="sell" class="d_none two_parts overflow">
+    <ul class="nav nav-pills nav-fill gap-5 p-1 small rounded-3" id="pillNav2" role="tablist" style="--bs-nav-link-color: var(--black); --bs-nav-pills-link-active-color: var(--white-cream); --bs-nav-pills-link-active-bg: var(--red--pale);">
       <li class="nav-item" role="presentation">
-        <button class="nav-link sell_linked active rounded-5" id="sell_add" data-bs-toggle="tab" type="button" role="tab" aria-selected="true">Add</button>
+        <button class="nav-link sell_linked active rounded-3" id="sell_add" data-bs-toggle="tab" type="button" role="tab" aria-selected="true">Add</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link sell_linked rounded-5" id="sell_remove" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Remove</button>
+        <button class="nav-link sell_linked rounded-3" id="sell_remove" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Remove</button>
       </li>
     </ul>
     <section id="sell_add" class="sell_d_true">
@@ -960,6 +959,7 @@
 
   <!-- Cart -->
 
+<<<<<<< HEAD
   <section id="cart" class="d_none two_parts">
     <section id="cart_cart" class="cart_d_none two_parts">
       <div id="cart-title-container">
@@ -993,8 +993,15 @@
       
         <button id="pay-button">Pay</button>
       </center>
+=======
+  <section id="cart" class="d_none two_parts overflow">
+    <section id="cart_cart" class="cart_d_none two_parts overflow">
+          <center>
+            <input id="cart_order_confirmation"type="submit" name="sign_up_submit" value="Sign-Up" id="sign-up-submit">
+          </center>
+>>>>>>> d10f8e0d487e0fa4ba3adc626e03aea83cbf38f4
     </section>
-      <section id="cart_payment" class="cart_d_none two_parts">
+      <section id="cart_payment" class="cart_d_none two_parts overflow">
       <div class="payment-container">
         <h1 class="payment-title">Page de paiement</h1>
         <form method="POST">
@@ -1018,13 +1025,14 @@
           <label class="payment-label" for="payment-security-code">Code de sécurité:</label>
           <input class="payment-input" type="text" id="payment-security-code" name="payment-security-code">
 
-          <button type="submit" name="payment-submit">Payer</button>
+          <button  class="return-order-button" type="button">Go back</button>
+          <button  class="payment-button" type="submit" name="payment-submit">Payer</button>
         </form>
+
+
       </div>
     </section>
   </section>
-
-  <p id="information-from-js"></p>
 
 </body> 
   

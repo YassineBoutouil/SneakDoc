@@ -56,6 +56,10 @@ section{
     width: 100%; /* Occupe 100% de la largeur disponible */
 }
 
+.overflow{
+    overflow: auto;
+}
+
 .containers{
     margin: 0%;
     display: flex;
@@ -160,7 +164,7 @@ font-size: 16px;
 font-weight: bold;
 }
 
-.add-to-cart-button, .negotiation-button {
+.add-to-cart-button, .negotiation-button, .payment-button, .return-order-button{
 width: 100%;
 padding: 10px;
 font-size: 14px;

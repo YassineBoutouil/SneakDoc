@@ -115,8 +115,9 @@ $(document).ready(function() {
   const tshirtFilters = $('#tshirt-filters');
   tshirtFilters.hide();
   tshirtSizeFilters.hide();
+  $("#cart_payment").hide()
   categorieSelect.on('change', function() {
-    const selectedCategory = $(this).val();
+  const selectedCategory = $(this).val();
 
     
     if (selectedCategory === 'sneakers') {
@@ -154,4 +155,41 @@ $(document).ready(function() {
     quantityElement.text(quantity);
   });
 
-});
+  function updateQuantityPrice(quantity) {
+    var initialPrice = parseFloat($('.initial-price').text().trim());
+    var totalPrice = initialPrice * quantity;
+
+    // Mettre à jour la quantité affichée
+    $('.quantity').text(quantity);
+
+    // Mettre à jour le prix total affiché
+    $('.total-price').text(totalPrice.toFixed(2));
+  }
+    // Initialiser la quantité et le prix total
+    updateQuantityPrice(1);
+
+    // Augmenter la quantité lors du clic sur le bouton "+"
+    $('.quantity-button.plus').on('click', function() {
+      var quantity = parseInt($('.quantity').text().trim()) + 1;
+      updateQuantityPrice(quantity);
+    });
+
+    // Diminuer la quantité lors du clic sur le bouton "-"
+    $('.quantity-button.minus').on('click', function() {
+      var quantity = parseInt($('.quantity').text().trim()) - 1;
+      if (quantity >= 1) {
+        updateQuantityPrice(quantity);
+      }
+    });
+
+
+    $("#cart_order_confirmation").on('click', function(){
+      $("#cart_payment").show()
+      $("#cart_cart").hide()
+    })
+
+    $(".return-order-button").on('click', function(){
+      $("#cart_payment").hide()
+      $("#cart_cart").show()
+    })
+  })
