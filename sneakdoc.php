@@ -162,7 +162,8 @@
       }
 
       if (isset($_POST['admin-addusersubmit'])) {
-        if($_SESSION['user_type_global'] != 3){
+        $user_type = isset($_COOKIE['user_type']) ? $_COOKIE['user_type'] : '';
+        if($user_type != 3){
           $message = "You Have to be a admin to do that !";
           echo '<script type="text/javascript">window.alert("'.$message.'");</script>';
         }
@@ -878,7 +879,7 @@
       $result = $mysqli->query($query);
 
       if ($result->num_rows > 0) {
-          echo '<table id="selling-removetable">';
+          echo '<div><table id="selling-removetable">';
           echo '<tr><th>Product Id</th><th>Categorie</th><th>Price</th><th>Action</th></tr>';
 
           while ($row = $result->fetch_assoc()) {
@@ -899,7 +900,7 @@
               echo '</tr>';
           }
 
-          echo '</table>';
+          echo '</table></div>';
       } else {
           echo 'No products found.';
       }

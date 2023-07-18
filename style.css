@@ -541,6 +541,17 @@ cursor: pointer;
     background-color: var(--white-cream);
 }
 
+#selling-removetable{
+    border-collapse: collapse;
+    box-shadow: 0 0 10px red; 
+    margin: 0 auto; 
+}
+
+#selling-removetable th, #selling-removetable td {
+    border: 1px solid black; 
+    padding: 8px; 
+}
+
 /* Admin CSS */
 
 #admin-firstgrid{
