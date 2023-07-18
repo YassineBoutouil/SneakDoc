@@ -23,6 +23,7 @@ nav{
 .two_parts{
     display: grid;
 }
+
 footer>div{
     background-color: var(--red--pale);
     box-shadow: 0px -8px 8px -6px rgba(0,0,0,.5);   
