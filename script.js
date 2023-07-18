@@ -50,6 +50,7 @@ $(document).ready(function() {
 
   $('.linked').click(function() {
     // Get the section ID to show
+    console.log(usertype)
     if(usertype == 0 && $(this).attr('id') != 'nav_buy'){
       $('section.d_true, section.d_none').each(function() {
         $(this).removeClass('d_true').addClass('d_none');
@@ -201,7 +202,7 @@ $(document).ready(function() {
     })
 
     $("#nav_disconnect").on('click',function(){
-      var usertype = 0
+      usertype = 0
       lock_for_user_type(usertype)
       window.addEventListener("beforeunload", resetAllCookies);
       console.log(usertype)
