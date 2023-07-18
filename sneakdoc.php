@@ -903,6 +903,11 @@
     </section>
   </section>
 
+  <section id="cart" class="d_none two_parts">
+    <section id="cart_cart" class="cart_d_none two_parts"></section>
+    <section id="cart_payment" class="cart_d_none two_parts"></section>
+  </section>
+
   <p id="information-from-js"></p>
 
 </body> 
