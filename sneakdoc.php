@@ -33,64 +33,6 @@
       $user_name = '';
 
 
-      $query = "SELECT * FROM best_offer LEFT JOIN product ON best_offer.Product_Id = product.Product_Id LEFT JOIN tshirt ON product.Product_Id = tshirt.Product_Id LEFT JOIN sneakers ON product.Product_Id = sneakers.Product_Id LEFT JOIN `image` ON product.Product_Id = `image`.Product_Id";
-
-      $result = $mysqli->query($query);
-
-      // Vérifier si la requête a renvoyé des résultats
-      if ($result->num_rows > 0) {
-          // Parcourir les résultats de la requête
-        while ($row = $result->fetch_assoc()) {
-            // Accéder aux valeurs des colonnes
-            $seller_id = $row["User_Id"];
-            $best_offer_id = $row["Best_Offer_Id"];
-            $categorie = $row["Categorie"];
-            $size = $row["Size"];
-            $color = $row["Color"];
-            $proposition_price = $row["Proposition_Price"];
-            $number_of_negociation = $row["Number_Of_Negociation"];
-            $product_id = $row["Product_Id"];
-            $product_description = $row["Product_Description"];
-            $product_title = $row["Product_Title"];
-            $type = $row["Type"];
-            $file_name = $row["File_Name"];
-
-            echo $file_name;
-            echo $product_description;
-
-            // Faire quelque chose avec les valeurs récupérées
-            // Par exemple, les afficher à l'écran
-            echo '<div class="product-card">';
-            echo '<p class="product-seller-id">ID du vendeur: ' . $seller_id . '</p>';
-            echo '<div class="product-image">';
-            echo '<img src=image/' . $file_name . ' alt='.$file_name.'>';
-            echo '</div>';
-            echo '<div class="product-details">';
-            echo '<h2 class="product-title">' . $product_title . '</h2>';
-            echo '<p class="product-code">Code du produit: ' . $product_id . '</p>';
-            echo '<div class="quantity-section">';
-            echo '<button class="quantity-button minus">-</button>';
-            echo '<span class="quantity">1</span>';
-            echo '<button class="quantity-button plus">+</button>';
-            echo '</div>';
-            echo '<h5 class="product-price">';
-            echo '<span class="price-label">Prix initial:</span>';
-            echo '<span class="initial-price">' . $proposition_price . '</span>';
-            echo '</h5>';
-            echo '<div class="negotiation-section">';
-            echo '<label for="negotiation-input">Négocier le prix:</label>';
-            echo '<input type="number" id="negotiation-input" class="negotiation-input" step="0.01" min="0" placeholder="Entrez votre prix">';
-            echo '<button class="negotiation-button">Négocier</button>';
-            echo '</div>';
-            echo '<a href="#" class="product-anchor">Voir le produit</a>';
-            echo '</div>';
-            echo '</div></br>';
-          };
-      }
-      else {
-          echo "Aucun résultat trouvé.";
-      }
-
       if (isset($_POST['sign_up_submit'])) {
           $mail = $_POST['sign_up_user_id'];
           $password = $_POST['sign_up_password'];
@@ -770,31 +712,62 @@
             </ul>
           </div>
             <section id="buy_best_offer" class="buy_d_true">
-              <div class="product-card">
-                <p class="product-seller-id">ID du vendeur</p>
-                <div class="product-image">
-                  <img src="image.jpg" alt="Product Image">
-                </div>
-                <div class="product-details">
-                  <h2 class="product-title">Nom du produit</h2>
-                  <p class="product-code">Code du produit</p>
-                  <div class="quantity-section">
-                    <button class="quantity-button minus">-</button>
-                    <span class="quantity">1</span>
-                    <button class="quantity-button plus">+</button>
-                  </div>
-                  <h5 class="product-price">
-                    <span class="price-label">Prix initial:</span>
-                    <span class="initial-price">19.99</span>
-                  </h5>
-                  <div class="negotiation-section">
-                    <label for="negotiation-input">Négocier le prix:</label>
-                    <input type="number" id="negotiation-input" class="negotiation-input" step="0.01" min="0" placeholder="Entrez votre prix">
-                    <button class="negotiation-button">Négocier</button>
-                  </div>
-                  <a href="#" class="product-anchor">Voir le produit</a>
-                </div>
-              </div>
+              <?php
+              $query = "SELECT * FROM best_offer LEFT JOIN product ON best_offer.Product_Id = product.Product_Id LEFT JOIN tshirt ON product.Product_Id = tshirt.Product_Id LEFT JOIN sneakers ON product.Product_Id = sneakers.Product_Id LEFT JOIN `image` ON product.Product_Id = `image`.Product_Id";
+
+              $result = $mysqli->query($query);
+        
+              // Vérifier si la requête a renvoyé des résultats
+              if ($result->num_rows > 0) {
+                  // Parcourir les résultats de la requête
+                while ($row = $result->fetch_assoc()) {
+                    // Accéder aux valeurs des colonnes
+                    $seller_id = $row["User_Id"];
+                    $best_offer_id = $row["Best_Offer_Id"];
+                    $categorie = $row["Categorie"];
+                    $size = $row["Size"];
+                    $color = $row["Color"];
+                    $price = $row["Price"];
+                    $number_of_negociation = $row["Number_Of_Negociation"];
+                    $product_id = $row["Product_Id"];
+                    $product_description = $row["Product_Description"];
+                    $product_title = $row["Product_Title"];
+                    $type = $row["Type"];
+                    $file_name = $row["File_Name"];
+        
+                    // Faire quelque chose avec les valeurs récupérées
+                    // Par exemple, les afficher à l'écran
+                    echo '<div class="product-card">';
+                    echo '<p class="product-seller-id">ID du vendeur: ' . $seller_id . '</p>';
+                    echo '<div class="product-image">';
+                    echo '<img src=image/"' . $file_name . '" alt="'.$file_name.'">';
+                    echo '</div>';
+                    echo '<div class="product-details">';
+                    echo '<h2 class="product-title">' . $product_title . '</h2>';
+                    echo '<p class="product-code">Code du produit: ' . $product_id . '</p>';
+                    echo '<div class="quantity-section">';
+                    echo '<button class="quantity-button minus">-</button>';
+                    echo '<span class="quantity">1</span>';
+                    echo '<button class="quantity-button plus">+</button>';
+                    echo '</div>';
+                    echo '<h5 class="product-price">';
+                    echo '<span class="price-label">Prix initial:</span>';
+                    echo '<span class="initial-price">' . $price . '</span>';
+                    echo '</h5>';
+                    echo '<div class="negotiation-section">';
+                    echo '<label for="negotiation-input">Négocier le prix:</label>';
+                    echo '<input type="number" id="negotiation-input" class="negotiation-input" step="0.01" min="0" placeholder="Entrez votre prix">';
+                    echo '<button class="negotiation-button">Négocier</button>';
+                    echo '</div>';
+                    echo '<a href="#" class="product-anchor">Voir le produit</a>';
+                    echo '</div>';
+                    echo '</div></br>';
+                  };
+              }
+              else {
+                  echo "Aucun résultat trouvé.";
+              }
+              ?>
             </Section>
 
 
