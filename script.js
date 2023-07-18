@@ -154,4 +154,71 @@ $(document).ready(function() {
     quantityElement.text(quantity);
   });
 
+
+
+
+
+  /* by now*/
+  var cart = []; // Tableau pour stocker les produits ajoutés au panier
+
+      $('.product-card').each(function() {
+        var product = {}; // Objet pour stocker les détails du produit
+        var $productCard = $(this);
+
+        // Récupérer les informations du produit
+        product.sellerId = $productCard.find('.product-seller-id').text().trim();
+        product.productId = $productCard.find('.product-code').text().trim();
+        product.productTitle = $productCard.find('.product-title').text().trim();
+        product.initialPrice = parseFloat($productCard.find('.initial-price').text().trim());
+
+        // Ajouter l'événement de clic pour ajouter le produit au panier
+        $productCard.find('.product-anchor').on('click', function(e) {
+          e.preventDefault();
+
+          // Récupérer la quantité du produit
+          var quantity = parseInt($productCard.find('.quantity').text().trim());
+
+          // Vérifier si une quantité valide est sélectionnée
+          if (quantity > 0) {
+            product.quantity = quantity;
+            product.totalPrice = product.initialPrice * quantity;
+
+            // Vérifier si le produit est déjà dans le panier
+            var existingProduct = cart.find(function(item) {
+              return item.productId === product.productId;
+            });
+
+            if (existingProduct) {
+              // Mettre à jour la quantité et le prix total du produit existant
+              existingProduct.quantity += product.quantity;
+              existingProduct.totalPrice += product.totalPrice;
+            } else {
+              // Ajouter le produit au panier
+              cart.push(product);
+            }
+
+            // Afficher une confirmation
+            alert('Le produit "' + product.productTitle + '" a été ajouté au panier.');
+
+            // Réinitialiser la quantité à 1
+            $productCard.find('.quantity').text('1');
+          } else {
+            alert('Veuillez sélectionner une quantité valide.');
+          }
+        });
+
+        // Gestion des boutons "+" et "-" pour augmenter/diminuer la quantité
+        $productCard.find('.quantity-button.plus').on('click', function() {
+          var quantity = parseInt($productCard.find('.quantity').text().trim());
+          $productCard.find('.quantity').text(quantity + 1);
+        });
+
+        $productCard.find('.quantity-button.minus').on('click', function() {
+          var quantity = parseInt($productCard.find('.quantity').text().trim());
+          if (quantity > 1) {
+            $productCard.find('.quantity').text(quantity - 1);
+          }
+        });
+      });
+
 });
