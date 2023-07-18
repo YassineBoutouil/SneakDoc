@@ -324,10 +324,13 @@
           <button class="nav-link linked rounded-5" id="nav_account" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Account</button>
         </li>
         <li class="nav-item" role="presentation">
-          <button class="nav-link linked rounded-5" id="nav_sign_in" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Sign In</button>
+          <button class="nav-link linked active rounded-2" id="nav_sign_in" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Sign In</button>
         </li>
         <li class="nav-item" role="presentation">
-          <button class="nav-link linked rounded-5" id="nav_sign_up" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Sign Up</button>
+          <button class="nav-link linked active rounded-2" id="nav_sign_up" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Sign Up</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link linked active rounded-2" id="nav_disconnect" data-bs-toggle="tab" type="button" role="tab" aria-selected="false">Disconnect</button>
         </li>
       </ul>
     </nav>
