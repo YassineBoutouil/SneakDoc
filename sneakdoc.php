@@ -326,6 +326,20 @@
             }
         }
     }
+
+    if (isset($_POST['payment-submit'])) {
+      $paymentType = $_POST['payment-type'];
+      $cardNumber = $_POST['payment-card-number'];
+      $cardName = $_POST['payment-card-name'];
+      $cardExpiration = $_POST['payment-card-expiration'];
+      $securityCode = $_POST['payment-security-code'];
+
+      $user_id = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : '';
+
+      echo "USER ID FROM PAYMENT : " . $user_id;
+  
+      
+    }
     
 
         
@@ -958,9 +972,40 @@
     </section>
   </section>
 
+  <!-- Cart -->
+
   <section id="cart" class="d_none two_parts">
-    <section id="cart_cart" class="cart_d_none two_parts"></section>
-    <section id="cart_payment" class="cart_d_none two_parts"></section>
+    <section id="cart_cart" class="cart_d_none two_parts">
+
+    </section>
+      <section id="cart_payment" class="cart_d_none two_parts">
+      <div class="payment-container">
+        <h1 class="payment-title">Page de paiement</h1>
+        <form method="POST">
+          <label class="payment-label" for="payment-type">Type de carte de paiement:</label>
+          <select class="payment-select" id="payment-type" name="payment-type">
+            <option value="Visa">Visa</option>
+            <option value="MasterCard">MasterCard</option>
+            <option value="American Express">American Express</option>
+            <option value="PayPal">PayPal</option>
+          </select>
+
+          <label class="payment-label" for="payment-card-number">Numéro de carte:</label>
+          <input class="payment-input" type="text" id="payment-card-number" name="payment-card-number">
+
+          <label class="payment-label" for="payment-card-name">Nom affiché sur la carte:</label>
+          <input class="payment-input" type="text" id="payment-card-name" name="payment-card-name">
+
+          <label class="payment-label" for="payment-card-expiration">Date d'expiration de la carte:</label>
+          <input class="payment-input" type="text" id="payment-card-expiration" name="payment-card-expiration">
+
+          <label class="payment-label" for="payment-security-code">Code de sécurité:</label>
+          <input class="payment-input" type="text" id="payment-security-code" name="payment-security-code">
+
+          <button type="submit" name="payment-submit">Payer</button>
+        </form>
+      </div>
+    </section>
   </section>
 
   <p id="information-from-js"></p>
