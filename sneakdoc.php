@@ -300,11 +300,6 @@
   
       
     }
-    
-
-        
-    
-    
 
     ?>
 
@@ -967,7 +962,37 @@
 
   <section id="cart" class="d_none two_parts">
     <section id="cart_cart" class="cart_d_none two_parts">
+      <div id="cart-title-container">
+        <h2 id="cart-title"> Your Cart </h2>
+      </div>
+      <center>
+        <div class="cart-product">
+          <div class="cart-product-row">
+            <div class="cart-product-col">
+              <img class="cart-product-image" src="image/64b6ae7956fe8.png" alt="Product Image">
+            </div>
+            <div class="cart-product-col">
+              <div class="cart-product-id">Product ID: ABC123</div>
+              <div class="cart-product-title">Product Title</div>
+            </div>
+            <div class="cart-product-col">
+              <div class="cart-product-size">Size: M</div>
+              <div class="cart-product-price">Price: $19.99</div>
+            </div>
+            <div class="cart-product-col">
+              <input type="number" id="cart-product-quantity" value="1">
+            </div>
+            <div class="cart-product-col">
+              <button class="delete-button">Delete</button>
+            </div>
+          </div>
+        </div>
 
+      
+        <div id="final-price">Final Price: $19.99</div>
+      
+        <button id="pay-button">Pay</button>
+      </center>
     </section>
       <section id="cart_payment" class="cart_d_none two_parts">
       <div class="payment-container">

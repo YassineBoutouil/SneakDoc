@@ -712,33 +712,33 @@ cursor: pointer;
     border: 1px solid #ff0000;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
+}
 
-  .payment-title {
+.payment-title {
     text-align: center;
     color: #ff0000;
-  }
+}
 
-  .payment-label {
+.payment-label {
     display: block;
     margin-bottom: 10px;
-  }
+}
 
-  .payment-input {
+.payment-input {
     width: 100%;
     padding: 8px;
     border: 1px solid #dddddd;
     border-radius: 4px;
-  }
+}
 
-  .payment-select {
+.payment-select {
     width: 100%;
     padding: 8px;
     border: 1px solid #dddddd;
     border-radius: 4px;
-  }
+}
 
-  .payment-button {
+.payment-button {
     display: inline-block;
     background-color: #ff0000;
     color: #ffffff;
@@ -748,8 +748,77 @@ cursor: pointer;
     cursor: pointer;
     font-size: 16px;
     text-align: center;
-  }
+}
 
-  .payment-button:hover {
+.payment-button:hover {
     background-color: #cc0000;
-  }
+}
+
+/* Cart */
+
+#cart-title-container{
+    height: 100px;
+}
+
+#cart-title{
+    margin: 20px 25% 50px 25%;
+    background-color: var(--white);
+    box-shadow: 0px 2px 2px var(--red);
+    text-align: center;
+}
+
+.cart-product {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e53935;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 10px #e53935;
+    height: 200px;
+    width: 80%;
+}
+
+.cart-product-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.cart-product-col {
+    flex: 1;
+    padding: 5px;
+}
+
+.cart-product-image {
+    max-width: 100%;
+    height: auto;
+}
+
+.cart-product-id,
+.cart-product-title,
+.cart-product-size,
+.cart-product-price {
+    font-weight: bold;
+    color: #e53935;
+}
+
+.cart-product-quantity {
+    width: 50px;
+}
+
+#final-price {
+    text-align: right;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #e53935;
+}
+
+#pay-button {
+    margin-top: 20px;
+    width: 20%;
+    height: 60px;
+    font-size: 2em;
+    font-weight: 600;
+    background-color: red;
+    color: white;
+}
