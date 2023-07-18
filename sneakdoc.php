@@ -959,9 +959,8 @@
 
   <!-- Cart -->
 
-<<<<<<< HEAD
-  <section id="cart" class="d_none two_parts">
-    <section id="cart_cart" class="cart_d_none two_parts">
+  <section id="cart" class="d_none two_parts overflow">
+    <section id="cart_cart" class="cart_d_none two_parts overflow">
       <div id="cart-title-container">
         <h2 id="cart-title"> Your Cart </h2>
       </div>
@@ -976,11 +975,13 @@
               <div class="cart-product-title">Product Title</div>
             </div>
             <div class="cart-product-col">
+              <div class="quantity-buttons">
+                <button class="quantity-button minus">-</button>
+                <input type="number" class="cart-product-quantity" value="1">
+                <button class="quantity-button plus">+</button>
+              </div>
               <div class="cart-product-size">Size: M</div>
               <div class="cart-product-price">Price: $19.99</div>
-            </div>
-            <div class="cart-product-col">
-              <input type="number" id="cart-product-quantity" value="1">
             </div>
             <div class="cart-product-col">
               <button class="delete-button">Delete</button>
@@ -991,15 +992,8 @@
       
         <div id="final-price">Final Price: $19.99</div>
       
-        <button id="pay-button">Pay</button>
+        <input id="cart_order_confirmation" type="submit" value="Pay">      
       </center>
-=======
-  <section id="cart" class="d_none two_parts overflow">
-    <section id="cart_cart" class="cart_d_none two_parts overflow">
-          <center>
-            <input id="cart_order_confirmation"type="submit" name="sign_up_submit" value="Sign-Up" id="sign-up-submit">
-          </center>
->>>>>>> d10f8e0d487e0fa4ba3adc626e03aea83cbf38f4
     </section>
       <section id="cart_payment" class="cart_d_none two_parts overflow">
       <div class="payment-container">
