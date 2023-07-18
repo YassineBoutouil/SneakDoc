@@ -63,7 +63,7 @@
             echo '<div class="product-card">';
             echo '<p class="product-seller-id">ID du vendeur: ' . $seller_id . '</p>';
             echo '<div class="product-image">';
-            echo '<img src=image/"' . $file_name . '" alt="'.$file_name.'">';
+            echo '<img src=image/' . $file_name . ' alt='.$file_name.'>';
             echo '</div>';
             echo '<div class="product-details">';
             echo '<h2 class="product-title">' . $product_title . '</h2>';
