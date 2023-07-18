@@ -866,7 +866,6 @@
         }
       }
 
-      $user_id = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : '';
       $user_type = isset($_COOKIE['user_type']) ? $_COOKIE['user_type'] : '';
       echo "User Id : " . $user_id . " User Type : " . $user_type;
       if($user_type == 3){
