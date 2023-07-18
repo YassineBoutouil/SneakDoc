@@ -906,10 +906,10 @@
     <section id="sell_remove" class="sell_d_none">
       <?php
         if (isset($_POST['delete_submit'])) {
-          $product_id = $_POST['product_id'];
+        $product_id = $_POST['product_id'];
 
           // Supprimer le produit de la base de données
-          $deleteQuery = "DELETE FROM product WHERE Product_Id = '$product_id'";
+          $deleteQuery = "DELETE FROM product WHERE Product_Id = '$product_id' AND User_Id = '$user_id'";
           if ($mysqli->query($deleteQuery)) {
               echo 'Product deleted successfully.';
           } else {
@@ -955,9 +955,10 @@
 
             echo '</table></div>';
         } else {
-            echo 'No products found.';
+            echo 'Error deleting product.';
         }
-      ?>
+      
+    ?>
     </section>
   </section>
 

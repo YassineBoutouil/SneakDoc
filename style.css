@@ -164,7 +164,7 @@ margin-bottom: 5px;
     font-weight: bold;
 }
 
-.add-to-cart-button, .negotiation-button, .payment-button, .return-order-button, #cart_order_confirmation, .delete-button{
+.add-to-cart-button, .negotiation-button, .payment-button, .return-order-button, #cart_order_confirmation{
     width: 100%;
     padding: 10px;
     font-size: 14px;
