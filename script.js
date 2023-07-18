@@ -23,6 +23,7 @@ $(document).ready(function() {
         $("#nav_admin").closest('.nav-item').addClass("d_none")
         $("#nav_sign_in").closest('.nav-item').addClass("d_none")
         $("#nav_sign_up").closest('.nav-item').addClass("d_none")
+        
       case 2:
         console.log("has seller")
         $("#nav_admin").closest('.nav-item').addClass("d_none")
@@ -36,8 +37,11 @@ $(document).ready(function() {
         break;
       default:
         console.log("has foreigner")
+        $("#nav_sign_in").closest('.nav-item').removeClass("d_none").addClass("d_true")
+        $("#nav_sign_up").closest('.nav-item').removeClass("d_none").addClass("d_true")
         $("#nav_sell").closest('.nav-item').addClass("d_none")
         $("#nav_admin").closest('.nav-item').addClass("d_none")
+        $("#nav_disconnect").closest('.nav-item').addClass("d_none")
         }
     }
 
@@ -192,6 +196,28 @@ $(document).ready(function() {
       $("#cart_payment").hide()
       $("#cart_cart").show()
     })
+
+    $("#nav_disconnect").on('click',function(){
+      var usertype = 0
+      lock_for_user_type(usertype)
+      window.addEventListener("beforeunload", resetAllCookies);
+      console.log(usertype)
+
+    })
+
+
+    function resetAllCookies() {
+      var cookies = document.cookie.split(";");
+    
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+      }
+    }
+    
+    })
   
     var selectedSizes = []; // Tableau pour stocker les tailles sélectionnées
     var selectedTypes = []; // Tableau pour stocker les types sélectionnés
@@ -228,5 +254,4 @@ $(document).ready(function() {
       }
 
       console.log('Types sélectionnés :', selectedTypes);
-    });
-})
+});
