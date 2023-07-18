@@ -909,7 +909,7 @@
           $product_id = $_POST['product_id'];
 
           // Supprimer le produit de la base de données
-          $deleteQuery = "DELETE FROM product WHERE Product_Id = '$product_id' AND User_Id = '$user_id'";
+          $deleteQuery = "DELETE FROM product WHERE Product_Id = '$product_id'";
           if ($mysqli->query($deleteQuery)) {
               echo 'Product deleted successfully.';
           } else {
@@ -918,6 +918,7 @@
         }
 
         $user_type = isset($_COOKIE['user_type']) ? $_COOKIE['user_type'] : '';
+        $user_id = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : '';
         echo "User Id : " . $user_id . " User Type : " . $user_type;
         if($user_type == 3){
           $query = "SELECT p.Product_Id, p.Categorie, p.Price FROM product p";
