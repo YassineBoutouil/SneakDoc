@@ -579,12 +579,6 @@
         </div>
       </section>
     </section>
-<?php
-      error_reporting(E_ERROR | E_PARSE);
-      if ($_SESSION['user_type'] == 2) {
-          echo '<div>Welcome ' . $user_name . '</div>';
-      }
-      ?>
 <!-- Buy -->
 <section id="buy" class="d_true two_parts">
         <section class="containers d_none ">
