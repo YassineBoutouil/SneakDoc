@@ -93,7 +93,7 @@
 
             if ($user_type == $user_type_from_js) {
                 echo "Access Granted";
-                setcookie('user_type', $user_type, time() + (86400 * 30), '/'); // Cookie valid for 30 days ! Watchout !
+                setcookie('user_type', $user_type, time() + (86400 * 30), '/');
                 setcookie('user_name', $user_name, time() + (86400 * 30), '/');
                 setcookie('user_id', $user_id, time() + (86400 * 30), '/');
             } else {
@@ -864,13 +864,21 @@
       }
 
       $user_id = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : '';
+      $user_type = isset($_COOKIE['user_type']) ? $_COOKIE['user_type'] : '';
+      echo "User Id : " . $user_id . " User Type : " . $user_type;
+      if($user_type == 3){
+        $query = "SELECT p.Product_Id, p.Categorie, p.Price FROM product p";
+      }
+      else{
+        $query = "SELECT p.Product_Id, p.Categorie, p.Price FROM product p WHERE p.User_Id = '$user_id'";
+      }
 
       // Récupérer les produits de l'utilisateur
-      $query = "SELECT p.Product_Id, p.Categorie, p.Price FROM product p WHERE p.User_Id = '$user_id'";
+      
       $result = $mysqli->query($query);
 
       if ($result->num_rows > 0) {
-          echo '<table>';
+          echo '<table id="selling-removetable">';
           echo '<tr><th>Product Id</th><th>Categorie</th><th>Price</th><th>Action</th></tr>';
 
           while ($row = $result->fetch_assoc()) {
