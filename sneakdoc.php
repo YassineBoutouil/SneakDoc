@@ -903,57 +903,57 @@
     <section id="sell_remove" class="sell_d_true">
       <?php
         if (isset($_POST['delete_submit'])) {
-        $product_id = $_POST['product_id'];
+          $product_id = $_POST['product_id'];
 
-        // Supprimer le produit de la base de données
-        $deleteQuery = "DELETE FROM product WHERE Product_Id = '$product_id' AND User_Id = '$user_id'";
-        if ($mysqli->query($deleteQuery)) {
-            echo 'Product deleted successfully.';
-        } else {
-            echo 'Error deleting product.';
-        }
-      }
-
-      $user_type = isset($_COOKIE['user_type']) ? $_COOKIE['user_type'] : '';
-      echo "User Id : " . $user_id . " User Type : " . $user_type;
-      if($user_type == 3){
-        $query = "SELECT p.Product_Id, p.Categorie, p.Price FROM product p";
-      }
-      else{
-        $query = "SELECT p.Product_Id, p.Categorie, p.Price FROM product p WHERE p.User_Id = '$user_id'";
-      }
-
-      // Récupérer les produits de l'utilisateur
-      
-      $result = $mysqli->query($query);
-
-      if ($result->num_rows > 0) {
-          echo '<div><table id="selling-removetable">';
-          echo '<tr><th>Product Id</th><th>Categorie</th><th>Price</th><th>Action</th></tr>';
-
-          while ($row = $result->fetch_assoc()) {
-              $product_id = $row['Product_Id'];
-              $categorie = $row['Categorie'];
-              $price = $row['Price'];
-
-              echo '<tr>';
-              echo '<td>' . $product_id . '</td>';
-              echo '<td>' . $categorie . '</td>';
-              echo '<td>' . $price . '</td>';
-              echo '<td>';
-              echo '<form method="post">';
-              echo '<input type="hidden" name="product_id" value="' . $product_id . '">';
-              echo '<input type="submit" name="delete_submit" value="Delete">';
-              echo '</form>';
-              echo '</td>';
-              echo '</tr>';
+          // Supprimer le produit de la base de données
+          $deleteQuery = "DELETE FROM product WHERE Product_Id = '$product_id' AND User_Id = '$user_id'";
+          if ($mysqli->query($deleteQuery)) {
+              echo 'Product deleted successfully.';
+          } else {
+              echo 'Error deleting product.';
           }
+        }
 
-          echo '</table></div>';
-      } else {
-          echo 'No products found.';
-      }
-    ?>
+        $user_type = isset($_COOKIE['user_type']) ? $_COOKIE['user_type'] : '';
+        echo "User Id : " . $user_id . " User Type : " . $user_type;
+        if($user_type == 3){
+          $query = "SELECT p.Product_Id, p.Categorie, p.Price FROM product p";
+        }
+        else{
+          $query = "SELECT p.Product_Id, p.Categorie, p.Price FROM product p WHERE p.User_Id = '$user_id'";
+        }
+
+        // Récupérer les produits de l'utilisateur
+        
+        $result = $mysqli->query($query);
+
+        if ($result->num_rows > 0) {
+            echo '<div><table id="selling-removetable">';
+            echo '<tr><th>Product Id</th><th>Categorie</th><th>Price</th><th>Action</th></tr>';
+
+            while ($row = $result->fetch_assoc()) {
+                $product_id = $row['Product_Id'];
+                $categorie = $row['Categorie'];
+                $price = $row['Price'];
+
+                echo '<tr>';
+                echo '<td>' . $product_id . '</td>';
+                echo '<td>' . $categorie . '</td>';
+                echo '<td>' . $price . '</td>';
+                echo '<td>';
+                echo '<form method="post">';
+                echo '<input type="hidden" name="product_id" value="' . $product_id . '">';
+                echo '<input type="submit" name="delete_submit" value="Delete">';
+                echo '</form>';
+                echo '</td>';
+                echo '</tr>';
+            }
+
+            echo '</table></div>';
+        } else {
+            echo 'No products found.';
+        }
+      ?>
     </section>
   </section>
 
