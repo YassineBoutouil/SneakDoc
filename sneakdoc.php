@@ -60,8 +60,6 @@
           }
       }
 
-
-      /**** */
       if (isset($_POST['login-submit'])) {
         $email = $_POST['login-mail-input'];
         $password = $_POST['login-pwd-input'];
@@ -283,6 +281,27 @@
       $user_id = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : '';
 
       echo "USER ID FROM PAYMENT : " . $user_id;
+
+      $sql = "SELECT * FROM users WHERE User_Id = $user_id";
+      echo $sql;
+      $result = $mysqli->query($sql);
+
+      if ($result->num_rows > 0) {
+        // Utilisateur trouvé dans la base de données
+        $row = $result->fetch_assoc();
+
+        // Comparaison des informations de paiement
+        if ($row['Payment_Type'] === $paymentType && $row['Card_Number'] === $cardNumber && $row['Card_Name'] === $cardName && $row['Card_Expiration_Date'] === $cardExpiration && $row['Security_Code'] === $securityCode) {
+            // Informations de paiement valides, effectuez les actions appropriées (par exemple, effectuez le paiement)
+            echo "Paiement réussi !";
+        } else {
+            // Informations de paiement invalides
+            echo "Informations de paiement incorrectes. Veuillez vérifier à nouveau.";
+        }
+    } else {
+        // Utilisateur non trouvé dans la base de données
+        echo "Utilisateur non autorisé à effectuer le paiement.";
+    }
   
       
     }
