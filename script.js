@@ -408,55 +408,57 @@ $(document).ready(function() {
     cartItems = cartItems.filter(function(item) {
       return item.id !== productId;
     });
-
-    $('select[name="selling-category"]').on('change', function() {
-      // Récupérer la valeur sélectionnée dans la catégorie
-      const selectedCategory = $(this).val();
-  
-      // Filtrer les choix de type en fonction de la catégorie sélectionnée
-      if (selectedCategory === 'tshirt') {
-        // Filtrer les choix de type pour les t-shirts
-        $('select[name="selling-type"]').html(`
-          <option value="V Cut">V Cut</option>
-          <option value="Round Neck">Round Neck</option>
-          <option value="Stand-up Collar">Stand-up Collar</option>
-          <option value="Oversize">Oversize</option>
-        `);
-      } else if (selectedCategory === 'sneakers') {
-        // Filtrer les choix de type pour les sneakers
-        $('select[name="selling-type"]').html(`
-          <option value="Low">Low</option>
-          <option value="Mid">Mid</option>
-          <option value="High">High</option>
-        `);
-      }
-  
-      // Filtrer les choix de taille en fonction de la catégorie sélectionnée
-      if (selectedCategory === 'tshirt') {
-        // Filtrer les choix de taille pour les t-shirts
-        $('select[name="selling-size"]').html(`
-          <option value="XS">XS</option>
-          <option value="S">S</option>
-          <option value="M">M</option>
-          <option value="L">L</option>
-          <option value="XL">XL</option>
-          <option value="2XL">2XL</option>
-        `);
-      } else if (selectedCategory === 'sneakers') {
-        // Filtrer les choix de taille pour les sneakers
-        $('select[name="selling-size"]').html(`
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-          <option value="11">11</option>
-          <option value="12">12</option>
-        `);
-      }
-    });
   })
+
+  $('select[name="selling-category"]').on('change', function() {
+    // Récupérer la valeur sélectionnée dans la catégorie
+    const selectedCategory = $(this).val();
+    console.log(selectedCategory)
+
+    // Filtrer les choix de type en fonction de la catégorie sélectionnée
+    if (selectedCategory === 'tshirt') {
+      // Filtrer les choix de type pour les t-shirts
+      $('select[name="selling-type"]').html(`
+        <option value="V Cut">V Cut</option>
+        <option value="Round Neck">Round Neck</option>
+        <option value="Stand-up Collar">Stand-up Collar</option>
+        <option value="Oversize">Oversize</option>
+      `);
+    } else if (selectedCategory === 'Sneakers') {
+      // Filtrer les choix de type pour les sneakers
+      $('select[name="selling-type"]').html(`
+        <option value="Low">Low</option>
+        <option value="Mid">Mid</option>
+        <option value="High">High</option>
+      `);
+    }
+
+    // Filtrer les choix de taille en fonction de la catégorie sélectionnée
+    if (selectedCategory === 'tshirt') {
+      // Filtrer les choix de taille pour les t-shirts
+      $('select[name="selling-size"]').html(`
+        <option value="XS">XS</option>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+        <option value="2XL">2XL</option>
+      `);
+    } else if (selectedCategory === 'Sneakers') {
+      // Filtrer les choix de taille pour les sneakers
+      $('select[name="selling-size"]').html(`
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+      `);
+    }
   });
+
+});

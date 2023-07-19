@@ -100,6 +100,7 @@
             } else {
                 $message = "Your account doesn't correspond with your role";
                 echo '<script type="text/javascript">window.alert("' . $message . '");</script>';
+                die();
             }
         } else {
             // User does not exist in the database
