@@ -31,7 +31,7 @@
       $user_type = '';
       $user_id = '';
       $user_name = '';
-
+      $price = 0;
 
       if (isset($_POST['sign_up_submit'])) {
           $mail = $_POST['sign_up_user_id'];
@@ -817,14 +817,15 @@
                   }
                 }
           
-                $query = "SELECT *, product.Product_Id FROM buy_now LEFT JOIN product ON buy_now.Product_Id = product.Product_Id LEFT JOIN tshirt ON product.Product_Id = tshirt.Product_Id LEFT JOIN sneakers ON product.Product_Id = sneakers.Product_Id LEFT JOIN `image` ON product.Product_Id = `image`.Product_Id";
-
+                $query = "SELECT *, product.Product_Id, `image.File_Name` FROM buy_now LEFT JOIN product ON buy_now.Product_Id = product.Product_Id LEFT JOIN tshirt ON product.Product_Id = tshirt.Product_Id LEFT JOIN sneakers ON product.Product_Id = sneakers.Product_Id LEFT JOIN `image` ON product.Product_Id = `image`.Product_Id";
+                
                 $result = $mysqli->query($query);
                 // Vérifier si la requête a renvoyé des résultats
                 if ($result->num_rows > 0) {
                     // Parcourir les résultats de la requête
                   while ($row = $result->fetch_assoc()) {
                       // Accéder aux valeurs des colonnes
+                      echo json_encode($row);
                       $buy_now_seller_id = $row["User_Id"];
                       $buy_now = $row["Best_Offer_Id"];
                       $buy_now_categorie = $row["Categorie"];
@@ -1094,42 +1095,52 @@
 
 
         <?php
+            $element = 0;
           	$query = "SELECT cart.Product_Id, cart.User_Id, cart.Quantity, cart.Cart_Id FROM cart LEFT JOIN product ON product.Product_Id = cart.Product_Id LEFT JOIN image on image.Product_Id = cart.Product_Id LEFT JOIN buy_now ON buy_now.Product_Id = cart.Product_Id";
             $result = $mysqli->query($query);
 
             if($result->num_rows > 0){
               while($row = $result->fetch_assoc()){
-
+                  echo json_encode($row);
+                  echo'<div class="cart-product">';
+                  echo'<div class="cart-product-row">';
+                  echo'<div class="cart-product-col">';
+                  echo'<img class="cart-product-image" src="image/64b6ae7956fe8.png" alt="Product Image">';
+                  echo'</div>';
+                  echo'<div class="cart-product-col">';
+                  echo'<div class="cart-product-id">Product ID: '.$row["Product_Id"].'</div>';
+                  echo'<div class="cart-product-title">Product Title</div>';
+                  echo'</div>';
+                  echo'<div class="cart-product-col">';
+                  echo'<div class="quantity-buttons">';
+                  echo'<button class="quantity-button minus">-</button>';
+                  echo'<input type="number" class="cart-product-quantity" value="'.$row["Quantity"].'">';
+                  echo'<button class="quantity-button plus">+</button>';
+                  echo'</div>';
+                  echo'<div class="cart-product-size">Size: M</div>';
+                  echo'<div class="cart-product-price">Price: $19.99</div>';
+                  echo'</div>';
+                  echo'<div class="cart-product-col">';
+                  echo '<form method="post">';
+                  echo'<button name="delete_into_cart" class="delete-button">Delete</button>';
+                  echo '<input type="hidden" name="product_id" value="' . $row["Product_Id"]. '">';
+                  echo'</form>';
+                  echo'</div>';
+                  echo'</div>';
+                  echo'</div>';
+                  echo'<div id="final-price">Final Price: $19.99</div>';
               }
             }
-        ?>
-        <div class="cart-product">
-          <div class="cart-product-row">
-            <div class="cart-product-col">
-              <img class="cart-product-image" src="image/64b6ae7956fe8.png" alt="Product Image">
-            </div>
-            <div class="cart-product-col">
-              <div class="cart-product-id">Product ID: ABC123</div>
-              <div class="cart-product-title">Product Title</div>
-            </div>
-            <div class="cart-product-col">
-              <div class="quantity-buttons">
-                <button class="quantity-button minus">-</button>
-                <input type="number" class="cart-product-quantity" value="1">
-                <button class="quantity-button plus">+</button>
-              </div>
-              <div class="cart-product-size">Size: M</div>
-              <div class="cart-product-price">Price: $19.99</div>
-            </div>
-            <div class="cart-product-col">
-              <button class="delete-button">Delete</button>
-            </div>
-          </div>
-        </div>
 
-      
-        <div id="final-price">Final Price: $19.99</div>
-      
+            if (isset($_POST['delete_into_cart'])) {
+              $product_id = $_POST['product_id'];
+    
+              // Supprimer le produit de la base de données
+              $deleteQuery = "DELETE FROM cart WHERE Product_Id = '$product_id'";
+              $mysqli->query($deleteQuery);
+              
+            }
+        ?>
         <input id="cart_order_confirmation" type="submit" value="Pay">      
       </center>
     </section>
