@@ -394,7 +394,7 @@
         </div>
       </div>
       <center>
-        <input type="submit" value="Save" id="account-submit" name="account-submit">
+        <input type="submit" value="Save" id="account-submit" name="account-submit" class="save-button">
       </center>
     </form>
   </section>
@@ -826,7 +826,7 @@
                     <span class="price-label">Prix actuel:</span>
                     <span class="current-price">24.99</span>
                   </h5>
-                  <a class="product-anchor">make an offer</a>
+                  <button class="make-anchor">Make an offer</button>
                 </div>
               </div>
             </Section>
@@ -922,7 +922,7 @@
         }
 
         if($user_type == 3){
-          $query = "SELECT p.Product_Id, p.Categorie, p.Price FROM product p";
+          $query = "SELECT p.User_Id p.Product_Id, p.Categorie, p.Price FROM product p";
           echo "User Id : " . $user_id . " User Type : " . $user_type;
         }
         else{
@@ -942,15 +942,17 @@
                 $product_id = $row['Product_Id'];
                 $categorie = $row['Categorie'];
                 $price = $row['Price'];
+                $user_id = $row['User_Id'];
 
                 echo '<tr>';
                 echo '<td>' . $product_id . '</td>';
                 echo '<td>' . $categorie . '</td>';
                 echo '<td>' . $price . '</td>';
+                echo '<td>' . $user_id . '</td>';
                 echo '<td>';
                 echo '<form method="post">';
                 echo '<input type="hidden" name="product_id" value="' . $product_id . '">';
-                echo '<input type="submit" name="delete_submit" value="Delete">';
+                echo '<input type="submit" class="delete-button" name="delete_submit" value="Delete">';
                 echo '</form>';
                 echo '</td>';
                 echo '</tr>';

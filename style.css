@@ -164,36 +164,18 @@ margin-bottom: 5px;
     font-weight: bold;
 }
 
-.add-to-cart-button, .negotiation-button, .payment-button, .return-order-button, #cart_order_confirmation{
-    width: 100%;
+.add-to-cart-button, .negotiation-button, .payment-button, .return-order-button, #cart_order_confirmation, .delete-button, .admin-userbutton, .admin-removeusersubmit, .save-button, #selling-submit, .make-anchor, #login-submit{
+    width: 125px;
     padding: 10px;
     font-size: 14px;
     font-weight: bold;
-    background-color: #ff0000;
+    background-color: var(--red--pale);
     color: #ffffff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-top: 10px;
 }
-
-.negotiation-button {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    font-weight: bold;
-    background-color: #ff0000;
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    }
-    
-    
-
-
-
-
-
 
 
 /* Role Choice CSS */
@@ -287,16 +269,6 @@ margin-bottom: 5px;
 
 #login-mail-text, #login-pwd-text{
     margin-top: 5px;
-}
-
-#login-submit{
-    margin-top: 20px;
-    width: 20%;
-    height: 60px;
-    font-size: 2em;
-    font-weight: 600;
-    background-color: red;
-    color: white;
 }
 
 /* sign-up CSS */
@@ -402,17 +374,6 @@ margin-bottom: 5px;
     width: 100%;
 }
 
-#account-submit{
-    margin-top: 20px;
-    width: 10%;
-    height: 60px;
-    font-size: 2em;
-    font-weight: 600;
-    background-color: red;
-    color: white;
-}
-
-
 /* to  buy product */
 .card{
     border: 1px solid var(--red--pale);
@@ -508,15 +469,6 @@ margin-bottom: 5px;
     height: 400px;
 }
 
-#selling-submit{
-    margin-top: 20px;
-    width: 10%;
-    height: 60px;
-    font-size: 2em;
-    font-weight: 600;
-    background-color: var(--red);
-    color: var(--white);
-}
     
 .selling-productsform{
     box-shadow: 0px 2px 2px var(--red);
@@ -589,16 +541,6 @@ margin-bottom: 5px;
     display: grid;
     grid-template-columns: 50% 50%;
     padding-top: 100px;
-}
-
-.admin-userbutton{
-    margin-top: 20px;
-    width: 40%;
-    height: 60px;
-    font-size: 2em;
-    font-weight: 600;
-    background-color: red;
-    color: white;
 }
 
 
