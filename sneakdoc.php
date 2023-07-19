@@ -769,8 +769,9 @@
                     echo '<label for="negotiation-input">Négocier le prix:</label>';
                     echo '<input type="number" id="negotiation-input" class="negotiation-input" step="0.01" min="0" placeholder="Entrez votre prix">';
                     echo '<button class="negotiation-button">Négocier</button>';
+                    echo '<a href="#" class="product-anchor">Voir le produit</a></br>';
+
                     echo '</div>';
-                    echo '<a href="#" class="product-anchor">Voir le produit</a>';
                     echo '</div>';
                     echo '</div></br>';
                   };
@@ -825,9 +826,10 @@
                               echo '<span class="price-label">Prix : </span>';
                               echo '<span class="initial-price">' . $buy_now_price . '</span>';
                               echo '</h5>';
-                              echo '<button class="add-to-cart-button">Add to cart</button>';
+                              echo '<button class="add-to-cart-button">Add to cart</button></br>';
+                              echo '<a href="#" class="product-anchor">Voir le produit</a>';
+
                           echo '</div>';
-                          echo '<a href="#" class="product-anchor">Voir le produit</a>';
                       echo '</div></br>';
                   };
                 }
@@ -839,31 +841,68 @@
 
             </Section>
             <section id="buy_anchor" class="buy_d_none">
-              <div class="product-card">
-                <p class="product-seller-id">ID du vendeur</p>
-                <div class="product-image">
-                  <img src="image.jpg" alt="Product Image">
-                </div>
-                <div class="product-details">
-                  <h2 class="product-title">Nom du produit</h2>
-                  <p class="product-code">Code du produit</p>
-                  <div class="date-section">
-                    <span class="starting-date">Starting date time</span>
-                    <span class="finish-date">End date time</span>
-                  </div>
-                  <h5 class="product-price">
-                    <span class="price-label">Prix initial:</span>
-                    <span class="initial-price">19.99</span>
-                  </h5>
-                  <h5 class="product-price">
-                    <span class="price-label">Prix actuel:</span>
-                    <span class="current-price">24.99</span>
-                  </h5>
-                  <a class="product-anchor">make an offer</a>
-                </div>
-              </div>
+            <?php
+              $query = "SELECT *, product.Product_Id, auctions.Price FROM auctions LEFT JOIN product ON auctions.Product_Id = product.Product_Id LEFT JOIN tshirt ON product.Product_Id = tshirt.Product_Id LEFT JOIN sneakers ON product.Product_Id = sneakers.Product_Id LEFT JOIN `image` ON product.Product_Id = `image`.Product_Id";
+
+              $result = $mysqli->query($query);
+        
+              // Vérifier si la requête a renvoyé des résultats
+              if ($result->num_rows > 0) {
+                  // Parcourir les résultats de la requête
+                while ($row = $result->fetch_assoc()) {
+                    // Accéder aux valeurs des colonnes
+                    $auction_seller_id = $row["User_Id"];
+                    $auction = $row["Best_Offer_Id"];
+                    $auction_categorie = $row["Categorie"];
+                    $auction_size = $row["Size"];
+                    $auction_color = $row["Color"];
+                    $auction_starting_date = $row["Starting_Date"];
+                    $auction_finish_date = $row["Finish_Date"];
+                    $auction_current_price = $row["Actual_Bid"];
+                    $auction_price = $row["Price"];
+                    $auction_number_of_negociation = $row["Number_Of_Negociation"];
+                    $auction_product_id = $row["Product_Id"];
+                    $auction_product_description = $row["Product_Description"];
+                    $auction_product_title = $row["Product_Title"];
+                    $auction = $row["Type"];
+                    $auction = $row["File_Name"];
+        
+                    // Faire quelque chose avec les valeurs récupérées
+                    // Par exemple, les afficher à l'écran
+                    echo '<div class="product-card">';
+                        echo '<p class="product-seller-id">ID du vendeur: ' . $buy_now_seller_id . '</p>';
+                        echo '<div class="product-image">';
+                        echo    '<img src=image/"' . $buy_now_file_name . '" alt="'.$buy_now_file_name.'">';
+                        echo '</div>';
+                        echo '<div class="product-details">';
+                            echo '<h2 class="product-title">' . $auction_product_title . '</h2>';
+                            echo '<p class="product-code">Code du produit: ' . $auction_product_id . '</p>';
+                            echo '<div class="quantity-section">';
+                            echo '<div class="date-section">';
+                            echo '<span class="starting-date">'.$auction_starting_date.'</span><br>';  
+                            echo '<span class="to-date">To</span><br>';  
+                            echo '<span class="finish-date">'.$auction_finish_date.'</span>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '<h5 class="product-price">';
+                            echo '<span class="price-label">Initial-price : </span>';
+                            echo '<span class="initial-price">' . $auction_price . '</span>';
+                            echo '</h5>';
+                            echo '<h5 class="product-price">';
+                            echo '<span class="price-label">Current price : </span>';
+                            echo '<span class="current-price">' . $auction_current_price . '</span>';
+                            echo '</h5>';
+                            echo '<button class="make-anchor">Make an offer</button>';
+
+                        echo '</div>';
+                    echo '</div></br>';
+                };
+              }
+              else {
+                  echo "Aucun résultat trouvé.";
+              }
+              ?>
             </Section>
-          
           </section>
         </section>
       </section>
