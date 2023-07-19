@@ -397,7 +397,7 @@
         </div>
       </div>
       <center>
-        <input type="submit" value="Save" id="account-submit" name="account-submit" class="save-button">
+        <input type="submit" value="Save" id="account-submit" name="account-submit">
       </center>
     </form>
   </section>
@@ -726,7 +726,7 @@
           </div>
             <section id="buy_best_offer" class="buy_d_true">
               <?php
-              $query = "SELECT * FROM best_offer LEFT JOIN product ON best_offer.Product_Id = product.Product_Id LEFT JOIN tshirt ON product.Product_Id = tshirt.Product_Id LEFT JOIN sneakers ON product.Product_Id = sneakers.Product_Id LEFT JOIN `image` ON product.Product_Id = `image`.Product_Id";
+              $query = "SELECT *, product.Product_Id FROM best_offer LEFT JOIN product ON best_offer.Product_Id = product.Product_Id LEFT JOIN tshirt ON product.Product_Id = tshirt.Product_Id LEFT JOIN sneakers ON product.Product_Id = sneakers.Product_Id LEFT JOIN `image` ON product.Product_Id = `image`.Product_Id";
 
               $result = $mysqli->query($query);
         
@@ -753,7 +753,7 @@
                     echo '<div class="product-card">';
                     echo '<p class="product-seller-id">ID du vendeur: ' . $seller_id . '</p>';
                     echo '<div class="product-image">';
-                    echo '<img src=image/"' . $file_name . '" alt="'.$file_name.'">';
+                    echo '<img src="image/' . $file_name . '" alt="'.$file_name.'">';
                     echo '</div>';
                     echo '<div class="product-details">';
                     echo '<h2 class="product-title">' . $product_title . '</h2>';
@@ -764,7 +764,7 @@
                     echo '<button class="quantity-button plus">+</button>';
                     echo '</div>';
                     echo '<h5 class="product-price">';
-                    echo '<span class="price-label">Prix initial:</span>';
+                    echo '<span class="price-label">Prix initial : </span>';
                     echo '<span class="initial-price">' . $price . '</span>';
                     echo '</h5>';
                     echo '<div class="negotiation-section">';
@@ -787,24 +787,57 @@
 
             <section id="buy_buy_now" class="buy_d_none">
                 <!--php to generate-->
-                <div class="product-card">
-                  <p class="product-seller-id">ID du vendeur</p>
-                  <div class="product-image">
-                    <img src="image.jpg" alt="Product Image">
-                  </div>
-                  <div class="product-details">
-                    <h2 class="product-title">Nom du produit</h2>
-                    <p class="product-code">Code du produit</p>
-                    <div class="quantity-section">
-                      <button class="quantity-button minus">-</button>
-                      <span class="quantity">1</span>
-                      <button class="quantity-button plus">+</button>
-                    </div>
-                    <h5 class="product-price">Price </h5>
-                    <button class="add-to-cart-button">Ajouter au panier</button>
-                  </div>
-                </div>
-                <!--php to generate-->
+              <?php
+                $query = "SELECT *, product.Product_Id FROM buy_now LEFT JOIN product ON buy_now.Product_Id = product.Product_Id LEFT JOIN tshirt ON product.Product_Id = tshirt.Product_Id LEFT JOIN sneakers ON product.Product_Id = sneakers.Product_Id LEFT JOIN `image` ON product.Product_Id = `image`.Product_Id";
+
+                $result = $mysqli->query($query);
+                // Vérifier si la requête a renvoyé des résultats
+                if ($result->num_rows > 0) {
+                    // Parcourir les résultats de la requête
+                  while ($row = $result->fetch_assoc()) {
+                      // Accéder aux valeurs des colonnes
+                      $buy_now_seller_id = $row["User_Id"];
+                      $buy_now = $row["Best_Offer_Id"];
+                      $buy_now_categorie = $row["Categorie"];
+                      $buy_now_size = $row["Size"];
+                      $buy_now_color = $row["Color"];
+                      $buy_now_price = $row["Price"];
+                      $buy_now_number_of_negociation = $row["Number_Of_Negociation"];
+                      $buy_now_product_id = $row["Product_Id"];
+                      $buy_now_product_description = $row["Product_Description"];
+                      $buy_now_product_title = $row["Product_Title"];
+                      $buy_now_type = $row["Type"];
+                      $buy_now_file_name = $row["File_Name"];          
+                      // Faire quelque chose avec les valeurs récupérées
+                      // Par exemple, les afficher à l'écran
+                      echo '<div class="product-card">';
+                          echo '<p class="product-seller-id">ID du vendeur: ' . $buy_now_seller_id . '</p>';
+                          echo '<div class="product-image">';
+                          echo    '<img src="image/' . $buy_now_file_name . '" alt="'.$buy_now_file_name.'">';
+                          echo '</div>';
+                          echo '<div class="product-details">';
+                              echo '<h2 class="product-title">' . $buy_now_product_title . '</h2>';
+                              echo '<p class="product-code">Code du produit: ' . $buy_now_product_id . '</p>';
+                              echo '<div class="quantity-section">';
+                                  echo '<button class="quantity-button minus">-</button>';
+                                  echo '<span class="quantity">1</span>';
+                                  echo '<button class="quantity-button plus">+</button>';
+                              echo '</div>';
+                              echo '<h5 class="product-price">';
+                              echo '<span class="price-label">Prix : </span>';
+                              echo '<span class="initial-price">' . $buy_now_price . '</span>';
+                              echo '</h5>';
+                              echo '<button class="add-to-cart-button">Add to cart</button>';
+                          echo '</div>';
+                          echo '<a href="#" class="product-anchor">Voir le produit</a>';
+                      echo '</div></br>';
+                  };
+                }
+                else {
+                    echo "Aucun résultat trouvé.";
+                }
+              ?>
+              <!--php to generate-->
 
             </Section>
             <section id="buy_anchor" class="buy_d_none">
@@ -828,7 +861,7 @@
                     <span class="price-label">Prix actuel:</span>
                     <span class="current-price">24.99</span>
                   </h5>
-                  <button class="make-anchor">Make an offer</button>
+                  <a class="product-anchor">make an offer</a>
                 </div>
               </div>
             </Section>
@@ -907,15 +940,11 @@
     </section>
     <section id="sell_remove" class="sell_d_none">
       <?php
-        $user_id = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : '';
-        $user_type = isset($_COOKIE['user_type']) ? $_COOKIE['user_type'] : '';
-
-        echo $user_id;
         if (isset($_POST['delete_submit'])) {
           $product_id = $_POST['product_id'];
 
           // Supprimer le produit de la base de données
-          $deleteQuery = "DELETE FROM product WHERE Product_Id = '$product_id' AND User_Id = '$user_id'";
+          $deleteQuery = "DELETE FROM product WHERE Product_Id = '$product_id'";
           if ($mysqli->query($deleteQuery)) {
               echo 'Product deleted successfully.';
           } else {
@@ -923,13 +952,14 @@
           }
         }
 
+        $user_type = isset($_COOKIE['user_type']) ? $_COOKIE['user_type'] : '';
+        $user_id = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : '';
+        echo "User Id : " . $user_id . " User Type : " . $user_type;
         if($user_type == 3){
-          $query = "SELECT p.User_Id p.Product_Id, p.Categorie, p.Price FROM product p";
-          echo "User Id : " . $user_id . " User Type : " . $user_type;
+          $query = "SELECT p.Product_Id, p.Categorie, p.Price FROM product p";
         }
         else{
           $query = "SELECT p.Product_Id, p.Categorie, p.Price FROM product p WHERE p.User_Id = '$user_id'";
-          echo "User Id :: " . $user_id . " User Type : " . $user_type;
         }
 
         // Récupérer les produits de l'utilisateur
@@ -944,17 +974,15 @@
                 $product_id = $row['Product_Id'];
                 $categorie = $row['Categorie'];
                 $price = $row['Price'];
-                $user_id = $row['User_Id'];
 
                 echo '<tr>';
                 echo '<td>' . $product_id . '</td>';
                 echo '<td>' . $categorie . '</td>';
                 echo '<td>' . $price . '</td>';
-                echo '<td>' . $user_id . '</td>';
                 echo '<td>';
                 echo '<form method="post">';
                 echo '<input type="hidden" name="product_id" value="' . $product_id . '">';
-                echo '<input type="submit" class="delete-button" name="delete_submit" value="Delete">';
+                echo '<input type="submit" name="delete_submit" value="Delete">';
                 echo '</form>';
                 echo '</td>';
                 echo '</tr>';
@@ -962,10 +990,9 @@
 
             echo '</table></div>';
         } else {
-            echo 'Error deleting product.(display table)';
+            echo 'No products found.';
         }
-      
-    ?>
+      ?>
     </section>
   </section>
 
