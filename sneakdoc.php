@@ -905,8 +905,12 @@
     </section>
     <section id="sell_remove" class="sell_d_none">
       <?php
+        $user_id = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : '';
+        $user_type = isset($_COOKIE['user_type']) ? $_COOKIE['user_type'] : '';
+
+        echo $user_id;
         if (isset($_POST['delete_submit'])) {
-        $product_id = $_POST['product_id'];
+          $product_id = $_POST['product_id'];
 
           // Supprimer le produit de la base de données
           $deleteQuery = "DELETE FROM product WHERE Product_Id = '$product_id' AND User_Id = '$user_id'";
@@ -917,14 +921,13 @@
           }
         }
 
-        $user_type = isset($_COOKIE['user_type']) ? $_COOKIE['user_type'] : '';
-        $user_id = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : '';
-        echo "User Id : " . $user_id . " User Type : " . $user_type;
         if($user_type == 3){
           $query = "SELECT p.Product_Id, p.Categorie, p.Price FROM product p";
+          echo "User Id : " . $user_id . " User Type : " . $user_type;
         }
         else{
           $query = "SELECT p.Product_Id, p.Categorie, p.Price FROM product p WHERE p.User_Id = '$user_id'";
+          echo "User Id :: " . $user_id . " User Type : " . $user_type;
         }
 
         // Récupérer les produits de l'utilisateur
@@ -955,7 +958,7 @@
 
             echo '</table></div>';
         } else {
-            echo 'Error deleting product.';
+            echo 'Error deleting product.(display table)';
         }
       
     ?>
