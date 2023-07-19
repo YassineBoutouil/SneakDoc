@@ -265,12 +265,8 @@ $(document).ready(function() {
         query += " INNER JOIN `tshirt` ON `product`.`Product_Id` = `tshirt`.`Product_Id`";
       }
   
-      if (conditions.length > 0) {
-        query += " WHERE " + conditions.join(" AND ");
-      }
-  
       if (types.length > 0 || sizes.length > 0) {
-        query += " AND (";
+        query += " WHERE (";
         if (types.length > 0) {
           query += "`Type` IN ('" + types.join("', '") + "')";
         }
@@ -283,9 +279,14 @@ $(document).ready(function() {
         query += ")";
       }
   
+      // Jointures supplémentaires avec les tables best_offer, buy_now et auctions
+      query += " LEFT JOIN `best_offer` ON `product`.`Product_Id` = `best_offer`.`Product_Id`";
+      query += " LEFT JOIN `buy_now` ON `product`.`Product_Id` = `buy_now`.`Product_Id`";
+      query += " LEFT JOIN `auctions` ON `product`.`Product_Id` = `auctions`.`Product_Id`";
+  
       // Afficher la requête SQL dans la console
       console.log(query);
-
+  
       // Afficher la requête SQL sur la page
       $('#sql-query').text(query);
     }
