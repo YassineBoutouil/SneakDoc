@@ -197,85 +197,95 @@
       }
         
       if (isset($_POST['selling-submit'])) {
-        echo "je vend un produit !";
-        $user_type = isset($_COOKIE['user_type']) ? $_COOKIE['user_type'] : '';
-        $user_name = isset($_COOKIE['user_name']) ? $_COOKIE['user_name'] : '';
-        $user_id = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : '';
-    
-        $productTitle = $_POST['selling-usertitle'];
-        $productPrice = $_POST['selling-price'];
-        $productType = $_POST['selling-type'];
-        $productCategory = $_POST['selling-category'];
-        $productEndDate = $_POST['selling-enddate'];
-        $productSize = $_POST['selling-size'];
-        $productSellType = $_POST['selling-selltype'];
-        $productColor = $_POST['selling-color'];
-        $productDescription = $_POST['selling-productdescription'];
-    
-        $insertQuery = "INSERT INTO `product` (`Categorie`, `User_Id`, `Price`, `Product_Description`, `Product_Title`)
-                        VALUES ('$productCategory', '$user_id', '$productPrice', '$productDescription', '$productTitle')";
-        echo $insertQuery;
-    
-        if ($mysqli->query($insertQuery)) {
-            $productId = $mysqli->insert_id;
-    
-            // Insert specific product information into the appropriate table (t-shirt or sneakers)
-            if ($productCategory == 'tshirt') {
-              $insertTshirtQuery = "INSERT INTO `tshirt` (`Size`, `Color`, `Product_Id`, `Type`) 
-                                    VALUES ('$productSize', '$productColor', '$productId' , '$productType')";
-              $mysqli->query($insertTshirtQuery);
-            } elseif ($productCategory == 'Sneakers') {
-              $insertSneakersQuery = "INSERT INTO `sneakers` (`Size`, `Color`, `Product_Id`, `Type`) 
+          echo "je vend un produit !";
+          $user_type = isset($_COOKIE['user_type']) ? $_COOKIE['user_type'] : '';
+          $user_name = isset($_COOKIE['user_name']) ? $_COOKIE['user_name'] : '';
+          $user_id = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : '';
+
+          $productTitle = $_POST['selling-usertitle'];
+          $productPrice = $_POST['selling-price'];
+          $productType = $_POST['selling-type'];
+          $productCategory = $_POST['selling-category'];
+          $productEndDate = $_POST['selling-enddate'];
+          $productSize = $_POST['selling-size'];
+          $productSellType = $_POST['selling-selltype'];
+          $productColor = $_POST['selling-color'];
+          $productDescription = $_POST['selling-productdescription'];
+          $productImage = isset($_FILES['product-image']) ? $_FILES['product-image'] : null;
+
+          if (
+              !(empty($productTitle) || empty($productPrice) || empty($productType) ||
+              empty($productCategory) || empty($productSize) || empty($productColor) ||
+              empty($productDescription) || ($productSellType == 'Auctions' && empty($productEndDate)) ||
+              !$productImage || $productImage['error'] !== UPLOAD_ERR_OK)
+          ) 
+          {
+              $insertQuery = "INSERT INTO `product` (`Categorie`, `User_Id`, `Price`, `Product_Description`, `Product_Title`)
+                            VALUES ('$productCategory', '$user_id', '$productPrice', '$productDescription', '$productTitle')";
+              echo $insertQuery;
+              
+          }
+          else{
+              echo "Veuillez remplir tous les champs et télécharger une image.";
+          }
+
+          
+          if ($mysqli->query($insertQuery)) {
+              $productId = $mysqli->insert_id;
+
+              if ($productCategory == 'tshirt') {
+                  $insertTshirtQuery = "INSERT INTO `tshirt` (`Size`, `Color`, `Product_Id`, `Type`) 
                                       VALUES ('$productSize', '$productColor', '$productId' , '$productType')";
-              $mysqli->query($insertSneakersQuery);
-              echo "je mets à jour sneakers avec cette requete : " . $insertSneakersQuery;
-            }
-    
+                  $mysqli->query($insertTshirtQuery);
+              } elseif ($productCategory == 'Sneakers') {
+                  $insertSneakersQuery = "INSERT INTO `sneakers` (`Size`, `Color`, `Product_Id`, `Type`) 
+                                          VALUES ('$productSize', '$productColor', '$productId' , '$productType')";
+                  $mysqli->query($insertSneakersQuery);
+                  echo "je mets à jour sneakers avec cette requete : " . $insertSneakersQuery;
+              }
 
-            echo '<pre>';
-            print_r($_FILES);
-            echo '</pre>';
+              if ($productImage) {
+                  $fileName = $productImage['name'];
+                  $tempName = $productImage['tmp_name'];
+                  $uploadDirectory = 'image/'; 
+                  $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+                  $newFileName = uniqid() . '.' . $fileExtension;
+                  $uploadPath = $uploadDirectory . $newFileName;
 
-            if (isset($_FILES['product-image'])) {
-                $fileName = $_FILES['product-image']['name'];
-                $tempName = $_FILES['product-image']['tmp_name'];
-                $uploadDirectory = 'image/'; // Path to the upload directory
-                $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-                $newFileName = uniqid() . '.' . $fileExtension;
-                $uploadPath = $uploadDirectory . $newFileName;
-    
-                // Move the uploaded file to the upload directory
-                if (move_uploaded_file($tempName, $uploadPath)) {
-                    // Save the image information in the "image" table of the database
-                    $insertImageQuery = "INSERT INTO `image` (`Product_Id`, `File_Name`) VALUES ('$productId', '$newFileName')";
-                    $mysqli->query($insertImageQuery);
-                    echo "The file has been uploaded and the information has been added successfully.";
-                } 
-                else {
-                    echo "An error occurred while uploading the file.";
-                }
-            }
-    
-            if ($productSellType == 'Auctions') {
-                $insertAnchorQuery = "INSERT INTO `auctions` (`Categorie`, `Size`, `Color`, `Starting_Date`, `Finish_Date`, `Price`, `Product_Id`)
-                                      VALUES ('$productCategory', '$productSize', '$productColor', NOW(), '$productEndDate', '$productPrice', '$productId')";
-                $mysqli->query($insertAnchorQuery);
-                echo "Product added successfully.";
-            } elseif ($productSellType == 'Buy_Now') {
-                $insertBuyNowQuery = "INSERT INTO `buy_now` (`Categorie`, `Size`, `Color`, `Price`, `Product_Id`)
-                                      VALUES ('$productCategory', '$productSize', '$productColor', '$productPrice', '$productId')";
-                $mysqli->query($insertBuyNowQuery);
-                echo "Product added successfully.";
-            } elseif ($productSellType == 'Best_Offer') {
-                $insertBestOfferQuery = "INSERT INTO `best_offer` (`Categorie`, `Size`, `Color`, `Proposition_Price`, `Product_Id`)
+                  if (move_uploaded_file($tempName, $uploadPath)) {
+                      $insertImageQuery = "INSERT INTO `image` (`Product_Id`, `File_Name`) VALUES ('$productId', '$newFileName')";
+                      $mysqli->query($insertImageQuery);
+                      echo "Le fichier a été téléchargé et les informations ont été ajoutées avec succès.";
+                  } else {
+                      echo "Une erreur s'est produite lors du téléchargement du fichier.";
+                      die();
+                  }
+              }
+
+              if ($productSellType == 'Auctions') {
+                  $insertAnchorQuery = "INSERT INTO `auctions` (`Categorie`, `Size`, `Color`, `Starting_Date`, `Finish_Date`, `Price`, `Product_Id`)
+                                        VALUES ('$productCategory', '$productSize', '$productColor', NOW(), '$productEndDate', '$productPrice', '$productId')";
+                  $mysqli->query($insertAnchorQuery);
+                  echo "Product added successfully.";
+              } elseif ($productSellType == 'Buy_Now') {
+                  $insertBuyNowQuery = "INSERT INTO `buy_now` (`Categorie`, `Size`, `Color`, `Price`, `Product_Id`)
                                         VALUES ('$productCategory', '$productSize', '$productColor', '$productPrice', '$productId')";
-                $mysqli->query($insertBestOfferQuery);
-                echo "Product added successfully.";
-            } else {
-                echo "Error!";
-            }
+                  $mysqli->query($insertBuyNowQuery);
+                  echo "Product added successfully.";
+              } elseif ($productSellType == 'Best_Offer') {
+                  $insertBestOfferQuery = "INSERT INTO `best_offer` (`Categorie`, `Size`, `Color`, `Proposition_Price`, `Product_Id`)
+                                          VALUES ('$productCategory', '$productSize', '$productColor', '$productPrice', '$productId')";
+                  $mysqli->query($insertBestOfferQuery);
+                  echo "Product added successfully.";
+              } else {
+                  echo "Error!";
+              }
+          } else {
+              echo "Erreur lors de l'insertion du produit dans la base de données : " . $mysqli->error;
+          }
         }
-    }
+      
+
 
     if (isset($_POST['payment-submit'])) {
       $paymentType = $_POST['payment-type'];
