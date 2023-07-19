@@ -793,6 +793,17 @@
                   echo $user_type;
                   echo $product_id;
                   echo $user_id;
+
+                  $insertQuery = "INSERT INTO `cart` (`Quantity`,`Product_Id`,`User_Id`) 
+                              VALUES (1,'$product_id','$user_id')";
+                  echo $insertQuery;
+                  
+                  if ($mysqli->query($insertQuery)) {
+                      echo "The product has been added to the cart";
+                  } else {
+                      echo "Error detected.";
+      
+                  }
                 }
           
                 $query = "SELECT *, product.Product_Id FROM buy_now LEFT JOIN product ON buy_now.Product_Id = product.Product_Id LEFT JOIN tshirt ON product.Product_Id = tshirt.Product_Id LEFT JOIN sneakers ON product.Product_Id = sneakers.Product_Id LEFT JOIN `image` ON product.Product_Id = `image`.Product_Id";
@@ -1017,7 +1028,7 @@
           }
         }
 
-          = isset($_COOKIE['user_type']) ? $_COOKIE['user_type'] : '';
+        isset($_COOKIE['user_type']) ? $_COOKIE['user_type'] : '';
         $user_id = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : '';
         echo "User Id : " . $user_id . " User Type : " . $user_type;
         if($user_type == 3){
@@ -1069,6 +1080,18 @@
         <h2 id="cart-title"> Your Cart </h2>
       </div>
       <center>
+
+
+        <?php
+          	$query = "SELECT cart.Product_Id, cart.User_Id, cart.Quantity, cart.Cart_Id FROM cart LEFT JOIN product ON product.Product_Id = cart.Product_Id LEFT JOIN image on image.Product_Id = cart.Product_Id LEFT JOIN buy_now ON buy_now.Product_Id = cart.Product_Id";
+            $result = $mysqli->query($query);
+
+            if($result->num_rows > 0){
+              while($row = $result->fetch_assoc()){
+
+              }
+            }
+        ?>
         <div class="cart-product">
           <div class="cart-product-row">
             <div class="cart-product-col">
