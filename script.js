@@ -458,6 +458,5 @@ $(document).ready(function() {
         `);
       }
     });
-  })
 
   });
