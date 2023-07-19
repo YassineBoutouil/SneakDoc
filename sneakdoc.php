@@ -281,8 +281,6 @@
           else{
               echo "Veuillez remplir tous les champs et télécharger une image.";
           }
-
-          
           
         }
       
@@ -758,8 +756,11 @@
                 </li>
             </ul>
           </div>
-            <section id="buy_best_offer" class="buy_d_true">
+            <section id="buy_best_offer" class="buy_d_true ">
+            <div class="card-container">
+
               <?php
+              
               $query = "SELECT *, product.Product_Id FROM best_offer LEFT JOIN product ON best_offer.Product_Id = product.Product_Id LEFT JOIN tshirt ON product.Product_Id = tshirt.Product_Id LEFT JOIN sneakers ON product.Product_Id = sneakers.Product_Id LEFT JOIN `image` ON product.Product_Id = `image`.Product_Id";
 
               $result = $mysqli->query($query);
@@ -799,7 +800,7 @@
                     echo '<div class="negotiation-section">';
                     echo '<label for="negotiation-input">Négocier le prix:</label>';
                     echo '<input type="number" id="negotiation-input" class="negotiation-input" step="0.01" min="0" placeholder="Entrez votre prix">';
-                    echo '<button class="negotiation-button">Négocier</button>';
+                    echo '<button class="negotiation-button">Négocier</button></br>';
                     echo '<a href="#" class="product-anchor">Voir le produit</a></br>';
 
                     echo '</div>';
@@ -811,11 +812,14 @@
                   echo "Aucun résultat trouvé.";
               }
               ?>
+              </div>
             </Section>
 
 
 
             <section id="buy_buy_now" class="buy_d_none">
+            <div class="card-container">
+
                 <!--php to generate-->
               <?php
                 if(isset($_POST['Add_to_cart'])){
@@ -838,7 +842,7 @@
                   }
                 }
           
-                $query = "SELECT *, product.Product_Id, `image.File_Name` FROM buy_now LEFT JOIN product ON buy_now.Product_Id = product.Product_Id LEFT JOIN tshirt ON product.Product_Id = tshirt.Product_Id LEFT JOIN sneakers ON product.Product_Id = sneakers.Product_Id LEFT JOIN `image` ON product.Product_Id = `image`.Product_Id";
+                $query = "SELECT *, product.Product_Id, image.File_Name FROM buy_now LEFT JOIN product ON buy_now.Product_Id = product.Product_Id LEFT JOIN tshirt ON product.Product_Id = tshirt.Product_Id LEFT JOIN sneakers ON product.Product_Id = sneakers.Product_Id LEFT JOIN `image` ON product.Product_Id = `image`.Product_Id";
                 
                 $result = $mysqli->query($query);
                 // Vérifier si la requête a renvoyé des résultats
@@ -846,7 +850,7 @@
                     // Parcourir les résultats de la requête
                   while ($row = $result->fetch_assoc()) {
                       // Accéder aux valeurs des colonnes
-                      echo json_encode($row);
+                      //echo json_encode($row);
                       $buy_now_seller_id = $row["User_Id"];
                       $buy_now = $row["Best_Offer_Id"];
                       $buy_now_categorie = $row["Categorie"];
@@ -893,9 +897,10 @@
                 }
               ?>
               <!--php to generate-->
-
+            </div>
             </Section>
             <section id="buy_anchor" class="buy_d_none">
+            <div class="card-container">
             <?php
               $query = "SELECT *, auctions.Product_Id, auctions.Price FROM auctions LEFT JOIN product ON auctions.Product_Id = product.Product_Id LEFT JOIN tshirt ON product.Product_Id = tshirt.Product_Id LEFT JOIN sneakers ON product.Product_Id = sneakers.Product_Id LEFT JOIN `image` ON product.Product_Id = `image`.Product_Id";
 
@@ -958,6 +963,7 @@
                   echo "Aucun résultat trouvé.";
               }
               ?>
+            </div>
             </Section>
           </section>
         </section>
