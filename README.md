@@ -39,3 +39,13 @@ Translated with www.DeepL.com/Translator (free version)
 further clarification: 
 
  (ajout au panier et achat ?)
+
+
+something we failed to do: 
+
+Sort products in the purchase category
+
+details : 
+
+we've had several problems with the use of cookies and couldn't get past wamp because despite manual deletion of cookies they could remain in the browser
+
