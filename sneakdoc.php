@@ -103,6 +103,8 @@
         } else {
             // User does not exist in the database
             echo "You don't exist in our database, but you can create an account by clicking on the 'Sign Up!' button.";
+            setcookie('user_type', 0, time() + (86400 * 30), '/');
+
         }
       }
     
@@ -214,14 +216,15 @@
             $productId = $mysqli->insert_id;
     
             // Insert specific product information into the appropriate table (t-shirt or sneakers)
-            if ($productCategory == 'T-shirt') {
-                $insertTshirtQuery = "INSERT INTO `tshirt` (`Size`, `Color`, `Product_Id`) 
-                                      VALUES ('$productSize', '$productColor', '$productId')";
-                $mysqli->query($insertTshirtQuery);
+            if ($productCategory == 'tshirt') {
+              $insertTshirtQuery = "INSERT INTO `tshirt` (`Size`, `Color`, `Product_Id`, `Type`) 
+                                    VALUES ('$productSize', '$productColor', '$productId' , '$productType')";
+              $mysqli->query($insertTshirtQuery);
             } elseif ($productCategory == 'Sneakers') {
-                $insertSneakersQuery = "INSERT INTO `sneakers` (`Size`, `Color`, `Product_Id`) 
-                                        VALUES ('$productSize', '$productColor', '$productId')";
-                $mysqli->query($insertSneakersQuery);
+              $insertSneakersQuery = "INSERT INTO `sneakers` (`Size`, `Color`, `Product_Id`, `Type`) 
+                                      VALUES ('$productSize', '$productColor', '$productId' , '$productType')";
+              $mysqli->query($insertSneakersQuery);
+              echo "je mets à jour sneakers avec cette requete : " . $insertSneakersQuery;
             }
     
 
@@ -619,9 +622,9 @@
             <h2 class="filter-title">Catégories</h2>
             <div>
                 <select id="categorie">
-                <option value="sneakers">Sneakers</option>
-                <option value="tshirt">T-shirt</option>
-              </select>
+                  <option value="sneakers">Sneakers</option>
+                  <option value="tshirt">T-shirt</option>
+                </select>
             </div>
             <hr>
 
@@ -697,11 +700,10 @@
             <div id="tshirt-filters" class="">
               <h3 class="filter-title">Type</h3>
               <label>
-                <input type="checkbox" name="type" value="v-neck"> Col V <br>
-                <input type="checkbox" name="type" value="v-neck"> Col Rond <br>
-                <input type="checkbox" name="type" value="v-neck"> Col Mao <br>
-                <input type="checkbox" name="type" value="v-neck"> Col Haut <br>
-                <input type="checkbox" name="type" value="v-neck"> Oversize <br>
+                <input type="checkbox" name="type" value="v-neck"> V Cut <br>
+                <input type="checkbox" name="type" value="round-neck"> Round Neck <br>
+                <input type="checkbox" name="type" value="stand-up-collar"> Stand-up Collar <br>
+                <input type="checkbox" name="type" value="oversize"> Oversize <br>
               </label>
             </div>
 
@@ -871,7 +873,7 @@
                 <p class="selling-producttitle">Category</p>
                 <select class="selling-productsform selling-selection-choice" name="selling-category">
                   <option value="Sneakers">Sneakers</option>
-                  <option value="T-shirt">T-shirt</option>
+                  <option value="tshirt">T-shirt</option>
                 </select>
               </div>
               <div>

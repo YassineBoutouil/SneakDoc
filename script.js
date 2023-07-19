@@ -220,5 +220,89 @@ $(document).ready(function() {
       }
     }
     
-    // Call the function to reset all cookies
-  })
+
+    $("#login-submit").on("click",function(){
+        resetAllCookies()
+        usertype = parseInt(getCookie("user_type"));
+        lock_for_user_type(usertype);
+        console.log(usertype)
+    })
+
+    function generateQuery() {
+      // Tableau pour stocker les conditions de filtre
+      var conditions = [];
+  
+      // Récupérer la valeur sélectionnée dans le menu déroulant "Catégories"
+      var categorie = $('#categorie').val();
+      if (categorie) {
+        conditions.push("`Categorie` = '" + categorie + "'");
+      }
+  
+      // Tableaux pour stocker les valeurs sélectionnées des types et des tailles
+      var types = [];
+      var sizes = [];
+  
+      // Parcourir les cases à cocher des types
+      $('input[name="type"]').each(function() {
+        if ($(this).is(':checked')) {
+          types.push($(this).val());
+        }
+      });
+  
+      // Parcourir les cases à cocher des tailles
+      $('input[name="size"]').each(function() {
+        if ($(this).is(':checked')) {
+          sizes.push($(this).val());
+        }
+      });
+  
+      // Générer la requête SQL en fonction des conditions de filtre
+      var query = "SELECT * FROM `product`";
+  
+      if (categorie === "sneakers") {
+        query += " INNER JOIN `sneakers` ON `product`.`Product_Id` = `sneakers`.`Product_Id`";
+      } else if (categorie === "tshirt") {
+        query += " INNER JOIN `tshirt` ON `product`.`Product_Id` = `tshirt`.`Product_Id`";
+      }
+  
+      if (conditions.length > 0) {
+        query += " WHERE " + conditions.join(" AND ");
+      }
+  
+      if (types.length > 0 || sizes.length > 0) {
+        query += " AND (";
+        if (types.length > 0) {
+          query += "`Type` IN ('" + types.join("', '") + "')";
+        }
+        if (types.length > 0 && sizes.length > 0) {
+          query += " OR ";
+        }
+        if (sizes.length > 0) {
+          query += "`Size` IN ('" + sizes.join("', '") + "')";
+        }
+        query += ")";
+      }
+  
+      // Afficher la requête SQL dans la console
+      console.log(query);
+
+      // Afficher la requête SQL sur la page
+      $('#sql-query').text(query);
+    }
+  
+    // Écouteur d'événement pour les changements dans le menu déroulant "Catégories"
+    $('#categorie').change(function() {
+      generateQuery();
+    });
+  
+    // Écouteur d'événement pour les changements dans les cases à cocher des types
+    $('input[name="type"]').change(function() {
+      generateQuery();
+    });
+  
+    // Écouteur d'événement pour les changements dans les cases à cocher des tailles
+    $('input[name="size"]').change(function() {
+      generateQuery();
+    });
+
+  });
