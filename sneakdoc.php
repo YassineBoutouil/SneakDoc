@@ -274,13 +274,14 @@
                 } else {
                     echo "Error!";
                 }
-            } else {
+              } 
+              else {
                 echo "Erreur lors de l'insertion du produit dans la base de données : " . $mysqli->error;
+              }
             }
-          }
-          else{
+            else{
               echo "Veuillez remplir tous les champs et télécharger une image.";
-          }
+            }
           
         }
       
