@@ -13,6 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   </head>
   <body>
+<!-- php -->
 
   <?php
       session_start();
@@ -302,7 +303,6 @@
   
       
     }
-
     ?>
 
 <!-- Navbar -->
@@ -338,70 +338,70 @@
       </ul>
     </nav>
 
+
 <!-- Account -->
-    <!-- Account -->
-<section id="account" class="d_none two_parts">
-  <section id="account">
-    <div>
-      <h2 id="account-title">Your Account</h2>
-    </div>
-    <form method="POST">
-      <div id="account-containerchoice">
-        <div class="account-grid">
-          <div>
-            <h2>Name and Surname</h2>
-          </div>
-          <div>
-            <input type="text" class="account-caracteristic" name="new_name" value="<?php echo isset($_SESSION['user_name']) ? $_SESSION['user_name'] : ''; ?>">
-          </div>
-        </div>
-        <div class="account-grid">
-          <div>
-            <h2>Address</h2>
-          </div>
-          <div>
-            <input type="text" class="account-caracteristic" name="new_address" value="<?php echo isset($_SESSION['user_address']) ? $_SESSION['user_address'] : ''; ?>">
-          </div>
-        </div>
-        <div class="account-grid">
-          <div>
-            <h2>City</h2>
-          </div>
-          <div>
-            <input type="text" class="account-caracteristic" name="new_city" value="<?php echo isset($_SESSION['user_city']) ? $_SESSION['user_city'] : ''; ?>">
-          </div>
-        </div>
-        <div class="account-grid">
-          <div>
-            <h2>Postal Code</h2>
-          </div>
-          <div>
-            <input type="text" class="account-caracteristic" name="new_postal_code" value="<?php echo isset($_SESSION['user_postal_code']) ? $_SESSION['user_postal_code'] : ''; ?>">
-          </div>
-        </div>
-        <div class="account-grid">
-          <div>
-            <h2>Country</h2>
-          </div>
-          <div>
-            <input type="text" class="account-caracteristic" name="new_country" value="<?php echo isset($_SESSION['user_country']) ? $_SESSION['user_country'] : ''; ?>">
-          </div>
-        </div>
-        <div class="account-grid">
-          <div>
-            <h2>Telephone Number</h2>
-          </div>
-          <div>
-            <input type="text" class="account-caracteristic" name="new_telephone_number" value="<?php echo isset($_SESSION['user_telephone']) ? $_SESSION['user_telephone'] : ''; ?>">
-          </div>
-        </div>
+  <section id="account" class="d_none two_parts">
+    <section id="account">
+      <div>
+        <h2 id="account-title">Your Account</h2>
       </div>
-      <center>
-        <input type="submit" value="Save" id="account-submit" name="account-submit">
-      </center>
-    </form>
+      <form method="POST">
+        <div id="account-containerchoice">
+          <div class="account-grid">
+            <div>
+              <h2>Name and Surname</h2>
+            </div>
+            <div>
+              <input type="text" class="account-caracteristic" name="new_name" value="<?php echo isset($_SESSION['user_name']) ? $_SESSION['user_name'] : ''; ?>">
+            </div>
+          </div>
+          <div class="account-grid">
+            <div>
+              <h2>Address</h2>
+            </div>
+            <div>
+              <input type="text" class="account-caracteristic" name="new_address" value="<?php echo isset($_SESSION['user_address']) ? $_SESSION['user_address'] : ''; ?>">
+            </div>
+          </div>
+          <div class="account-grid">
+            <div>
+              <h2>City</h2>
+            </div>
+            <div>
+              <input type="text" class="account-caracteristic" name="new_city" value="<?php echo isset($_SESSION['user_city']) ? $_SESSION['user_city'] : ''; ?>">
+            </div>
+          </div>
+          <div class="account-grid">
+            <div>
+              <h2>Postal Code</h2>
+            </div>
+            <div>
+              <input type="text" class="account-caracteristic" name="new_postal_code" value="<?php echo isset($_SESSION['user_postal_code']) ? $_SESSION['user_postal_code'] : ''; ?>">
+            </div>
+          </div>
+          <div class="account-grid">
+            <div>
+              <h2>Country</h2>
+            </div>
+            <div>
+              <input type="text" class="account-caracteristic" name="new_country" value="<?php echo isset($_SESSION['user_country']) ? $_SESSION['user_country'] : ''; ?>">
+            </div>
+          </div>
+          <div class="account-grid">
+            <div>
+              <h2>Telephone Number</h2>
+            </div>
+            <div>
+              <input type="text" class="account-caracteristic" name="new_telephone_number" value="<?php echo isset($_SESSION['user_telephone']) ? $_SESSION['user_telephone'] : ''; ?>">
+            </div>
+          </div>
+        </div>
+        <center>
+          <input type="submit" value="Save" id="account-submit" name="account-submit">
+        </center>
+      </form>
+    </section>
   </section>
-</section>
 
     
 <!-- Sign Up -->
@@ -609,7 +609,7 @@
       </section>
     </section>
 <!-- Buy -->
-<section id="buy" class="d_true two_parts">
+  <section id="buy" class="d_true two_parts">
         <section class="containers d_none">
           <section class="aside">
             <?php
@@ -750,7 +750,7 @@
         
                     // Faire quelque chose avec les valeurs récupérées
                     // Par exemple, les afficher à l'écran
-                    echo '<div class="product-card">';
+                    echo '<div id="best_offer_'.$product_id .'" class="product-card">';
                     echo '<p class="product-seller-id">ID du vendeur: ' . $seller_id . '</p>';
                     echo '<div class="product-image">';
                     echo '<img src="image/' . $file_name . '" alt="'.$file_name.'">';
@@ -758,11 +758,6 @@
                     echo '<div class="product-details">';
                     echo '<h2 class="product-title">' . $product_title . '</h2>';
                     echo '<p class="product-code">Code du produit: ' . $product_id . '</p>';
-                    echo '<div class="quantity-section">';
-                    echo '<button class="quantity-button minus">-</button>';
-                    echo '<span class="quantity">1</span>';
-                    echo '<button class="quantity-button plus">+</button>';
-                    echo '</div>';
                     echo '<h5 class="product-price">';
                     echo '<span class="price-label">Prix initial : </span>';
                     echo '<span class="initial-price">' . $price . '</span>';
@@ -789,6 +784,15 @@
             <section id="buy_buy_now" class="buy_d_none">
                 <!--php to generate-->
               <?php
+                if(isset($_POST['Add_to_cart'])){
+                  $product_id = $_POST['buy_now_product_id'];
+                  $user_id = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : '';
+                  $user_type = isset($_COOKIE['user_type']) ? $_COOKIE['user_type'] : '';
+                  echo $user_type;
+                  echo $product_id;
+                  echo $user_id;
+                }
+          
                 $query = "SELECT *, product.Product_Id FROM buy_now LEFT JOIN product ON buy_now.Product_Id = product.Product_Id LEFT JOIN tshirt ON product.Product_Id = tshirt.Product_Id LEFT JOIN sneakers ON product.Product_Id = sneakers.Product_Id LEFT JOIN `image` ON product.Product_Id = `image`.Product_Id";
 
                 $result = $mysqli->query($query);
@@ -811,7 +815,8 @@
                       $buy_now_file_name = $row["File_Name"];          
                       // Faire quelque chose avec les valeurs récupérées
                       // Par exemple, les afficher à l'écran
-                      echo '<div class="product-card">';
+                      echo '<form method="POST">';
+                      echo '<div id="buy_now_'.$buy_now_product_id .'"class="product-card">';
                           echo '<p class="product-seller-id">ID du vendeur: ' . $buy_now_seller_id . '</p>';
                           echo '<div class="product-image">';
                           echo    '<img src="image/' . $buy_now_file_name . '" alt="'.$buy_now_file_name.'">';
@@ -820,19 +825,21 @@
                               echo '<h2 class="product-title">' . $buy_now_product_title . '</h2>';
                               echo '<p class="product-code">Code du produit: ' . $buy_now_product_id . '</p>';
                               echo '<div class="quantity-section">';
-                                  echo '<button class="quantity-button minus">-</button>';
-                                  echo '<span class="quantity">1</span>';
-                                  echo '<button class="quantity-button plus">+</button>';
+                                  echo '<button id="minus_'.$buy_now_product_id.'"class="quantity-button minus">-</button>';
+                                  echo '<span id="quantity_'.$buy_now_product_id.'"class="quantity">1</span>';
+                                  echo '<button id="plus_'.$buy_now_product_id.'" class="quantity-button plus">+</button>';
                               echo '</div>';
                               echo '<h5 class="product-price">';
                               echo '<span class="price-label">Prix : </span>';
-                              echo '<span class="initial-price">' . $buy_now_price . '</span>';
+                              echo '<span class="initial_price_'.$buy_now_price.'">' . $buy_now_price . '</span>';
                               echo '</h5>';
-                              echo '<button class="add-to-cart-button">Add to cart</button></br>';
+                              echo '<input type="hidden" name="buy_now_product_id" value="' . $buy_now_product_id . '">';
+                              echo '<button name="Add_to_cart" class="add-to-cart-button">Add to cart</button></br>';
                               echo '<a href="#" class="product-anchor">Voir le produit</a>';
 
                           echo '</div>';
                       echo '</div></br>';
+                    echo'</form>';
                   };
                 }
                 else {
@@ -844,7 +851,7 @@
             </Section>
             <section id="buy_anchor" class="buy_d_none">
             <?php
-              $query = "SELECT *, product.Product_Id, auctions.Price FROM auctions LEFT JOIN product ON auctions.Product_Id = product.Product_Id LEFT JOIN tshirt ON product.Product_Id = tshirt.Product_Id LEFT JOIN sneakers ON product.Product_Id = sneakers.Product_Id LEFT JOIN `image` ON product.Product_Id = `image`.Product_Id";
+              $query = "SELECT *, auctions.Product_Id, auctions.Price FROM auctions LEFT JOIN product ON auctions.Product_Id = product.Product_Id LEFT JOIN tshirt ON product.Product_Id = tshirt.Product_Id LEFT JOIN sneakers ON product.Product_Id = sneakers.Product_Id LEFT JOIN `image` ON product.Product_Id = `image`.Product_Id";
 
               $result = $mysqli->query($query);
         
@@ -852,9 +859,10 @@
               if ($result->num_rows > 0) {
                   // Parcourir les résultats de la requête
                 while ($row = $result->fetch_assoc()) {
+
                     // Accéder aux valeurs des colonnes
                     $auction_seller_id = $row["User_Id"];
-                    $auction = $row["Best_Offer_Id"];
+                    $auction = $row["Auctions_Id"];
                     $auction_categorie = $row["Categorie"];
                     $auction_size = $row["Size"];
                     $auction_color = $row["Color"];
@@ -866,19 +874,19 @@
                     $auction_product_id = $row["Product_Id"];
                     $auction_product_description = $row["Product_Description"];
                     $auction_product_title = $row["Product_Title"];
-                    $auction = $row["Type"];
-                    $auction = $row["File_Name"];
+                    $auction_type = $row["Type"];
+                    $auction_file_name = $row["File_Name"];
         
                     // Faire quelque chose avec les valeurs récupérées
                     // Par exemple, les afficher à l'écran
-                    echo '<div class="product-card">';
-                        echo '<p class="product-seller-id">ID du vendeur: ' . $buy_now_seller_id . '</p>';
+                    echo '<div id="auction_'.$auction_product_id .'" class="product-card">';
+                        echo '<p class="product-seller-id">ID du vendeur: ' . $auction_seller_id . '</p>';
                         echo '<div class="product-image">';
-                        echo    '<img src=image/"' . $buy_now_file_name . '" alt="'.$buy_now_file_name.'">';
+                        echo    '<img src="image/' . $auction_file_name . '" alt="'.$auction_file_name.'">';
                         echo '</div>';
                         echo '<div class="product-details">';
                             echo '<h2 class="product-title">' . $auction_product_title . '</h2>';
-                            echo '<p class="product-code">Code du produit: ' . $auction_product_id . '</p>';
+                            echo '<p name="product_id" value="'.$buy_now_product_id.'"class="product-code">Code du produit: ' . $auction_product_id . '</p>';
                             echo '<div class="quantity-section">';
                             echo '<div class="date-section">';
                             echo '<span class="starting-date">'.$auction_starting_date.'</span><br>';  
@@ -888,7 +896,7 @@
                             echo '</div>';
                             echo '<h5 class="product-price">';
                             echo '<span class="price-label">Initial-price : </span>';
-                            echo '<span class="initial-price">' . $auction_price . '</span>';
+                            echo '<span id="base_price_'.$auction_price.'" class="initial-price">' . $auction_price . '</span>';
                             echo '</h5>';
                             echo '<h5 class="product-price">';
                             echo '<span class="price-label">Current price : </span>';
@@ -991,7 +999,7 @@
           }
         }
 
-        $user_type = isset($_COOKIE['user_type']) ? $_COOKIE['user_type'] : '';
+          = isset($_COOKIE['user_type']) ? $_COOKIE['user_type'] : '';
         $user_id = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : '';
         echo "User Id : " . $user_id . " User Type : " . $user_type;
         if($user_type == 3){
@@ -1035,7 +1043,7 @@
     </section>
   </section>
 
-  <!-- Cart -->
+<!-- Cart -->
 
   <section id="cart" class="d_none two_parts overflow">
     <section id="cart_cart" class="cart_d_none two_parts overflow">
@@ -1105,8 +1113,6 @@
       </div>
     </section>
   </section>
-
-  <p>
 </body> 
   
         
