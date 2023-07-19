@@ -54,10 +54,12 @@ $(document).ready(function() {
       $('section.d_true, section.d_none').each(function() {
         $(this).removeClass('d_true').addClass('d_none');
         console.log($(this).attr('id'))
-        if($(this).attr('id') == 'nav_sign_up'){
+        if($(this).attr('id') == 'sign_up'){
           $("#sign_up").removeClass('d_none').addClass("d_true")
+          console.log("hey")
         }
         else{
+          $("#sign_up").addClass('d_none').removeClass("d_true")
           $("#sign_in").removeClass('d_none').addClass("d_true")
         }
       })
@@ -68,6 +70,19 @@ $(document).ready(function() {
     interact_with_nav("section.d_true, section.d_none","d_none","d_true",sectionId)
     }
   })
+
+  $('#nav_sign_up').click(function() {
+    // Définir l'ID du bouton "Buy"
+    const buttonId = 'nav_buy';
+  
+    // Ajouter la classe "active" au bouton "Buy" et la supprimer des autres boutons
+
+    // Définir l'ID de la section "Buy"
+    const sectionId = 'sign_up';
+  
+    // Afficher la section "Buy" et masquer les autres sections
+    interact_with_nav("section.d_true, section.d_none","d_none","d_true",sectionId);
+  });
 
   $('.logo').click(function() {
     // Définir l'ID du bouton "Buy"
