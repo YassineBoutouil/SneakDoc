@@ -50,7 +50,7 @@ $(document).ready(function() {
 
   $('.linked').click(function() {
     // Get the section ID to show
-    if(usertype == 0 && $(this).attr('id') != 'nav_buy'){
+    if((usertype == 0 || usertype == undefined || isNaN(usertype)) && $(this).attr('id') != 'nav_buy'){
       $('section.d_true, section.d_none').each(function() {
         $(this).removeClass('d_true').addClass('d_none');
         console.log($(this).attr('id'))

@@ -307,9 +307,18 @@
 
         if ($row['Payment_Type'] === $paymentType && $row['Card_Number'] === $cardNumber && $row['Card_Name'] === $cardName && $row['Card_Expiration_Date'] === $cardExpiration && $row['Security_Code'] === $securityCode) {
             echo "Payment successful!";
+
+            $take_productid_query = "SELECT Product_Id FROM cart WHERE User_Id = $user_id";
+
+            $result = $mysqli->query($take_productid_query);
+
+            echo $result;
+
             $delete_cart_query = "DELETE FROM cart WHERE User_Id = $user_id";
 
             $delete_product_query = "DELETE FROM product WHERE User_Id = $user_id";
+
+            echo $delete_product_query;
 
             $check_sneakers_query = "SELECT * FROM sneakers WHERE Product_Id IN 
                                     (SELECT Product_Id FROM product WHERE User_Id = $user_id)";
