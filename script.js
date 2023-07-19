@@ -69,6 +69,27 @@ $(document).ready(function() {
     }
   })
 
+  $('.logo').click(function() {
+    // Définir l'ID du bouton "Buy"
+    const buttonId = 'nav_buy';
+  
+    // Ajouter la classe "active" au bouton "Buy" et la supprimer des autres boutons
+    $('.nav-link').each(function() {
+      const id = $(this).attr('id');
+      if (id === buttonId) {
+        $(this).addClass('active');
+      } else {
+        $(this).removeClass('active');
+      }
+    });
+  
+    // Définir l'ID de la section "Buy"
+    const sectionId = 'buy';
+  
+    // Afficher la section "Buy" et masquer les autres sections
+    interact_with_nav("section.d_true, section.d_none","d_none","d_true",sectionId);
+  });
+
   $('.sell_linked').click(function() {
     // Get the section ID to show
     const sectionId = $(this).attr('id').replace('nav_', '');
@@ -388,7 +409,54 @@ $(document).ready(function() {
       return item.id !== productId;
     });
 
-    updateCartUI();
-  });
+    $('select[name="selling-category"]').on('change', function() {
+      // Récupérer la valeur sélectionnée dans la catégorie
+      const selectedCategory = $(this).val();
   
-});
+      // Filtrer les choix de type en fonction de la catégorie sélectionnée
+      if (selectedCategory === 'tshirt') {
+        // Filtrer les choix de type pour les t-shirts
+        $('select[name="selling-type"]').html(`
+          <option value="V Cut">V Cut</option>
+          <option value="Round Neck">Round Neck</option>
+          <option value="Stand-up Collar">Stand-up Collar</option>
+          <option value="Oversize">Oversize</option>
+        `);
+      } else if (selectedCategory === 'sneakers') {
+        // Filtrer les choix de type pour les sneakers
+        $('select[name="selling-type"]').html(`
+          <option value="Low">Low</option>
+          <option value="Mid">Mid</option>
+          <option value="High">High</option>
+        `);
+      }
+  
+      // Filtrer les choix de taille en fonction de la catégorie sélectionnée
+      if (selectedCategory === 'tshirt') {
+        // Filtrer les choix de taille pour les t-shirts
+        $('select[name="selling-size"]').html(`
+          <option value="XS">XS</option>
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="L">L</option>
+          <option value="XL">XL</option>
+          <option value="2XL">2XL</option>
+        `);
+      } else if (selectedCategory === 'sneakers') {
+        // Filtrer les choix de taille pour les sneakers
+        $('select[name="selling-size"]').html(`
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+        `);
+      }
+    });
+
+  });

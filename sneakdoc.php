@@ -196,6 +196,7 @@
       }
         
       if (isset($_POST['selling-submit'])) {
+        echo "je vend un produit !";
         $user_type = isset($_COOKIE['user_type']) ? $_COOKIE['user_type'] : '';
         $user_name = isset($_COOKIE['user_name']) ? $_COOKIE['user_name'] : '';
         $user_id = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : '';
@@ -212,6 +213,7 @@
     
         $insertQuery = "INSERT INTO `product` (`Categorie`, `User_Id`, `Price`, `Product_Description`, `Product_Title`)
                         VALUES ('$productCategory', '$user_id', '$productPrice', '$productDescription', '$productTitle')";
+        echo $insertQuery;
     
         if ($mysqli->query($insertQuery)) {
             $productId = $mysqli->insert_id;
@@ -308,7 +310,7 @@
 <!-- Navbar -->
     <nav class="navbar navbar-light">
       <a class="navbar-brand" href="#">
-        <img class="logo" src="image/sneakdoc_logo.png" width="160" height="35" alt="">
+        <img class="logo" src="image/sneakdoc_logo.png" width="160" height="35" alt="" >
       </a>
       <ul class="nav nav-pills nav-fill gap-2 p-1 small  rounded-5" id="pillNav2" role="tablist" style="--bs-nav-link-color: var(--black); --bs-nav-pills-link-active-color: var(--white-cream); --bs-nav-pills-link-active-bg: var(--red--pale);">
         <li class="nav-item" role="presentation">
@@ -947,12 +949,16 @@
               </div>
               <div>
                 <p class="selling-producttitle">Type</p>
-                <input type="textarea" class="selling-productsform" name="selling-type">
+                <select class="selling-productsform selling-selection-choice" name="selling-type">
+                  <option value="Low">Low</option>
+                  <option value="Mid">Mid</option>
+                  <option value="High">High</option>
+                </select>
               </div>
               <div>
                 <p class="selling-producttitle">Category</p>
                 <select class="selling-productsform selling-selection-choice" name="selling-category">
-                  <option value="Sneakers">Sneakers</option>
+                  <option value="Sneakers" selected>Sneakers</option>
                   <option value="tshirt">T-shirt</option>
                 </select>
               </div>
@@ -962,7 +968,18 @@
               </div>
               <div>
                 <p class="selling-producttitle">Size</p>
-                <input type="textarea" class="selling-productsform" name="selling-size">
+                <select class="selling-productsform selling-selection-choice" name="selling-size">
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                </select>
               </div>
               <div>
                 <p class="selling-producttitle">Type of sell</p>
@@ -985,6 +1002,7 @@
         </center>
       </form>
     </section>
+
     <section id="sell_remove" class="sell_d_none">
       <?php
         if (isset($_POST['delete_submit'])) {
