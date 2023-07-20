@@ -807,7 +807,7 @@
                       $buy_now_file_name = $row["File_Name"];        
                       echo '<form method="POST">';
                       echo '<div id="buy_now_'.$buy_now_product_id .'"class="product-card">';
-                          echo '<p class="product-seller-id">ID du vendeur: ' . $buy_now_seller_id . '</p>';
+                          echo '<p class="product-seller-id">Seller ID : ' . $buy_now_seller_id . '</p>';
                           echo '<div class="product-image">';
                           echo    '<img src="image/' . $buy_now_file_name . '" alt="'.$buy_now_file_name.'">';
                           echo '</div>';
