@@ -1066,12 +1066,11 @@
 
         $user_type = isset($_COOKIE['user_type']) ? $_COOKIE['user_type'] : '';
         $user_id = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : '';
-        echo "User Id : " . $user_id . " User Type : " . $user_type;
         if($user_type == 3){
-          $query = "SELECT p.Product_Id, p.Categorie, p.Price FROM product p";
+          $query = "SELECT p.Product_Title, p.Product_Id, p.Categorie, p.Price, p.User_Id FROM product p";
         }
         else{
-          $query = "SELECT p.Product_Id, p.Categorie, p.Price FROM product p WHERE p.User_Id = '$user_id'";
+          $query = "SELECT p.Product_Title, p.Product_Id, p.Categorie, p.Price, p.User_Id FROM product p WHERE p.User_Id = '$user_id'";
         }
 
         // Récupérer les produits de l'utilisateur
@@ -1080,17 +1079,21 @@
 
         if ($result->num_rows > 0) {
             echo '<div><table id="selling-removetable">';
-            echo '<tr><th>Product Id</th><th>Categorie</th><th>Price</th><th>Action</th></tr>';
+            echo '<tr><th>Title</th><th>Product Id</th><th>Categorie</th><th>Price</th><th>Seller</th><th>Action</th></tr>';
 
             while ($row = $result->fetch_assoc()) {
+                $producttitle = $row['Product_Title'];
                 $product_id = $row['Product_Id'];
                 $categorie = $row['Categorie'];
                 $price = $row['Price'];
+                $User_Id = $row['User_Id'];
 
                 echo '<tr>';
+                echo '<td>' . $producttitle . '</td>';
                 echo '<td>' . $product_id . '</td>';
                 echo '<td>' . $categorie . '</td>';
                 echo '<td>' . $price . '</td>';
+                echo '<td>' . $User_Id . '</td>';
                 echo '<td>';
                 echo '<form method="post">';
                 echo '<input type="hidden" name="product_id" value="' . $product_id . '">';
