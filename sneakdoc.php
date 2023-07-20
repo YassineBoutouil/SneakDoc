@@ -631,7 +631,7 @@
             }
             ?>
             <!-- Filtre par catégorie -->
-            <h2 class="filter-title">Catégories</h2>
+            <h2 class="filter-title">Categories</h2>
             <div>
                 <select id="categorie">
                   <option value="sneakers">Sneakers</option>
@@ -766,13 +766,13 @@
                     // Faire quelque chose avec les valeurs récupérées
                     // Par exemple, les afficher à l'écran
                     echo '<div id="best_offer_'.$product_id .'" class="product-card">';
-                    echo '<p class="product-seller-id">ID du vendeur: ' . $seller_id . '</p>';
+                    echo '<p class="product-seller-id">Seller ID : ' . $seller_id . '</p>';
                     echo '<div class="product-image">';
                     echo '<img src="image/' . $file_name . '" alt="'.$file_name.'">';
                     echo '</div>';
                     echo '<div class="product-details">';
                     echo '<h2 class="product-title">' . $product_title . '</h2>';
-                    echo '<p class="product-code">Code du produit: ' . $product_id . '</p>';
+                    echo '<p class="product-code">Product Code : ' . $product_id . '</p>';
                     echo '<h5 class="product-price">';
                     echo '<span class="price-label">Prix initial : </span>';
                     echo '<span class="initial-price">' . $price . '</span>';
