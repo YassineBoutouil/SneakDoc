@@ -308,34 +308,21 @@
         if ($row['Payment_Type'] === $paymentType && $row['Card_Number'] === $cardNumber && $row['Card_Name'] === $cardName && $row['Card_Expiration_Date'] === $cardExpiration && $row['Security_Code'] === $securityCode) {
             echo "Payment successful!";
 
-            $take_productid_query = "SELECT Product_Id FROM cart WHERE User_Id = $user_id";
+            echo $user_id;
 
-            $result = $mysqli->query($take_productid_query);
+            $delete_query = "DELETE cart, product, sneakers, tshirt, auctions, buy_now, best_offer
+            FROM cart
+            LEFT JOIN product ON cart.Product_Id = product.Product_Id
+            LEFT JOIN sneakers ON cart.Product_Id = sneakers.Product_Id
+            LEFT JOIN tshirt ON cart.Product_Id = tshirt.Product_Id
+            LEFT JOIN auctions ON cart.Product_Id = auctions.Product_Id
+            LEFT JOIN buy_now ON cart.Product_Id = buy_now.Product_Id
+            LEFT JOIN best_offer ON cart.Product_Id = best_offer.Product_Id
+            WHERE cart.User_Id = $user_id;";
 
-            echo $result;
+            echo $delete_query;
 
-            $delete_cart_query = "DELETE FROM cart WHERE User_Id = $user_id";
-
-            $delete_product_query = "DELETE FROM product WHERE User_Id = $user_id";
-
-            echo $delete_product_query;
-
-            $check_sneakers_query = "SELECT * FROM sneakers WHERE Product_Id IN 
-                                    (SELECT Product_Id FROM product WHERE User_Id = $user_id)";
-
-            $result_sneakers = $mysqli->query($check_sneakers_query);
-            if ($result_sneakers->num_rows > 0) {
-                $delete_sneakers_query = "DELETE FROM sneakers WHERE Product_Id IN 
-                                          (SELECT Product_Id FROM product WHERE User_Id = $user_id)";
-                $mysqli->query($delete_sneakers_query);
-            } else {
-                $delete_tshirt_query = "DELETE FROM tshirt WHERE Product_Id IN 
-                                        (SELECT Product_Id FROM product WHERE User_Id = $user_id)";
-                $mysqli->query($delete_tshirt_query);
-            }
-
-            $mysqli->query($delete_cart_query);
-            $mysqli->query($delete_product_query);
+            $mysqli->query($delete_query);
         } else {
             echo "Incorrect payment information. Please check again.";
         }
