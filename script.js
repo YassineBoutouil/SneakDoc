@@ -48,6 +48,9 @@ $(document).ready(function() {
         }
     }
 
+
+    console.log("heu")
+
   $('.linked').click(function() {
     // Get the section ID to show
     if((usertype == 0 || usertype == undefined || isNaN(usertype)) && $(this).attr('id') != 'nav_buy'){

@@ -772,17 +772,15 @@
                     echo '</div>';
                     echo '<div class="product-details">';
                     echo '<h2 class="product-title">' . $product_title . '</h2>';
-                    echo '<p class="product-code">Product Code : ' . $product_id . '</p>';
+                    echo '<p class="product-code">Product ID : ' . $product_id . '</p>';
                     echo '<h5 class="product-price">';
-                    echo '<span class="price-label">Prix initial : </span>';
+                    echo '<span class="price-label">Initial Price: </span>';
                     echo '<span class="initial-price">' . $price . '</span>';
                     echo '</h5>';
                     echo '<div class="negotiation-section">';
-                    echo '<label for="negotiation-input">Négocier le prix:</label>';
-                    echo '<input type="number" id="negotiation-input" class="negotiation-input" step="0.01" min="0" placeholder="Entrez votre prix">';
-                    echo '<button class="negotiation-button">Négocier</button></br>';
-                    echo '<a href="#" class="product-anchor">Voir le produit</a></br>';
-
+                    echo '<label for="negotiation-input">Negociate:</label>';
+                    echo '<input type="number" id="negotiation-input" class="negotiation-input" step="0.01" min="0" placeholder="Enter Your Price">';
+                    echo '<button class="negotiation-button">Negociate</button></br>';
                     echo '</div>';
                     echo '</div>';
                     echo '</div></br>';
@@ -850,20 +848,18 @@
                           echo '</div>';
                           echo '<div class="product-details">';
                               echo '<h2 class="product-title">' . $buy_now_product_title . '</h2>';
-                              echo '<p class="product-code">Code du produit: ' . $buy_now_product_id . '</p>';
+                              echo '<p class="product-code">Product ID :  ' . $buy_now_product_id . '</p>';
                               echo '<div class="quantity-section">';
                                   echo '<button id="minus_'.$buy_now_product_id.'"class="quantity-button minus">-</button>';
                                   echo '<span id="quantity_'.$buy_now_product_id.'"class="quantity">1</span>';
                                   echo '<button id="plus_'.$buy_now_product_id.'" class="quantity-button plus">+</button>';
                               echo '</div>';
                               echo '<h5 class="product-price">';
-                              echo '<span class="price-label">Prix : </span>';
+                              echo '<span class="price-label">Price : </span>';
                               echo '<span class="initial_price_'.$buy_now_price.'">' . $buy_now_price . '</span>';
                               echo '</h5>';
                               echo '<input type="hidden" name="buy_now_product_id" value="' . $buy_now_product_id . '">';
                               echo '<button name="Add_to_cart" class="add-to-cart-button">Add to cart</button></br>';
-                              echo '<a href="#" class="product-anchor">Voir le produit</a>';
-
                           echo '</div>';
                       echo '</div></br>';
                     echo'</form>';
@@ -908,13 +904,13 @@
                     // Faire quelque chose avec les valeurs récupérées
                     // Par exemple, les afficher à l'écran
                     echo '<div id="auction_'.$auction_product_id .'" class="product-card">';
-                    echo '<p class="product-seller-id">ID du vendeur: ' . $auction_seller_id . '</p>';
+                    echo '<p class="product-seller-id">Seller ID: ' . $auction_seller_id . '</p>';
                     echo '<div class="product-image">';
                     echo    '<img src="image/' . $auction_file_name . '" alt="'.$auction_file_name.'">';
                     echo '</div>';
                     echo '<div class="product-details">';
                     echo '<h2 class="product-title">' . $auction_product_title . '</h2>';
-                    echo '<p name="product_id" value="'.$buy_now_product_id.'"class="product-code">Code du produit: ' . $auction_product_id . '</p>';
+                    echo '<p name="product_id" value="'.$buy_now_product_id.'"class="product-code">Product ID : ' . $auction_product_id . '</p>';
                     echo '<div class="quantity-section">';
                     echo '<div class="date-section">';
                     echo '<span class="starting-date">'.$auction_starting_date.'</span><br>';  
@@ -930,7 +926,7 @@
                     echo '<span class="price-label">Current price : </span>';
                     echo '<span class="current-price">' . $auction_current_price . '</span>';
                     echo '<form method="POST">';
-                    echo '<input type="number" id="negotiation-input" class="negotiation-input" step="0.01" min="0" placeholder="Entrez votre prix">';
+                    echo '<input type="number" id="negotiation-input" class="negotiation-input" step="0.01" min="0" placeholder="Enter your price">';
                     echo '</h5>';
                     echo '<button class="make-anchor">Make an offer</button>';
                     echo '</form>';
@@ -1183,6 +1179,7 @@
               // Supprimer le produit de la base de données
               $deleteQuery = "DELETE FROM cart WHERE Product_Id = '$product_id'";
               $mysqli->query($deleteQuery);
+              echo POST_prod;
               
             }
             
