@@ -93,8 +93,13 @@ $(document).ready(function() {
       const id = $(this).attr('id');
       if (id === buttonId) {
         $(this).addClass('active');
+        $('#nav_buy').addClass('active');
+
       } else {
         $(this).removeClass('active');
+        $('#nav_sign_in').addClass('active');
+        $('#nav_sign_up').addClass('active');
+
       }
     });
   
