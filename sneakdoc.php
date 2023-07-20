@@ -1129,9 +1129,7 @@
               $product_id = $_POST['product_id'];
     
               $deleteQuery = "DELETE FROM cart WHERE Product_Id = '$product_id'";
-              $mysqli->query($deleteQuery);
-              echo POST_prod;
-              
+              $mysqli->query($deleteQuery);              
             }
             
             echo '<center><div id="final-price" class="final_price_order">Final Price : <span id="Final_Price">' . $totalPrice . '</span></div><center>';
