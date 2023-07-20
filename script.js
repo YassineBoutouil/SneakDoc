@@ -197,6 +197,8 @@ $(document).ready(function() {
     lock_for_user_type(usertype)
     window.addEventListener("beforeunload", resetAllCookies);
     console.log(usertype)
+    interact_with_nav("section.d_true, section.d_none","d_none","d_true","buy");
+
 
   })
 
