@@ -1154,20 +1154,20 @@
             <option value="PayPal">PayPal</option>
           </select>
 
-          <label class="payment-label" for="payment-card-number">Numéro de carte:</label>
+          <label class="payment-label" for="payment-card-number">Card Number:</label>
           <input class="payment-input" type="text" id="payment-card-number" name="payment-card-number">
 
-          <label class="payment-label" for="payment-card-name">Nom affiché sur la carte:</label>
+          <label class="payment-label" for="payment-card-name">Name display on the card:</label>
           <input class="payment-input" type="text" id="payment-card-name" name="payment-card-name">
 
-          <label class="payment-label" for="payment-card-expiration">Date d'expiration de la carte:</label>
+          <label class="payment-label" for="payment-card-expiration">Expiration date:</label>
           <input class="payment-input" type="text" id="payment-card-expiration" name="payment-card-expiration">
 
-          <label class="payment-label" for="payment-security-code">Code de sécurité:</label>
+          <label class="payment-label" for="payment-security-code">Security Code:</label>
           <input class="payment-input" type="text" id="payment-security-code" name="payment-security-code">
 
           <button  class="return-order-button" type="button">Go back</button>
-          <button  class="payment-button" type="submit" name="payment-submit">Payer</button>
+          <button  class="payment-button" type="submit" name="payment-submit">Pay</button>
         </form>
 
 
