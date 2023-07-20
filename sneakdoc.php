@@ -17,9 +17,6 @@
 
   <?php
       session_start();
-      ini_set('display_errors', 1);
-      ini_set('display_startup_errors', 1);
-      error_reporting(E_ALL);
 
       // Database connection
       $user = 'root';
@@ -47,15 +44,12 @@
           $query = "SELECT * FROM `users` WHERE `Mail` = '$mail'";
           $result = $mysqli->query($query);
           if ($result->num_rows > 0) {
-              echo "Mail already used.";
           } else {
               // insert user information in the database
               $insertQuery = "INSERT INTO `users` (`Mail`, `Pwd`, `Name`, `Address`, `City`, `Postal_Code`, `Country`, `Telephone_Number`, `User_Type`) 
                               VALUES ('$mail', '$password', '$name', '$address', '$city', '$postalCode', '$country', '$telephone', 1)";
               if ($mysqli->query($insertQuery)) {
-                  echo "The user has been added.";
               } else {
-                  echo "Error detected.";
               }
           }
       }
@@ -90,10 +84,7 @@
 
             
     
-            echo $user_id;
-
             if ($user_type == $user_type_from_js) {
-                echo "Access Granted";
                 setcookie('user_type', $user_type, time() + (86400 * 30), '/');
                 setcookie('user_name', $user_name, time() + (86400 * 30), '/');
                 setcookie('user_id', $user_id, time() + (86400 * 30), '/');
@@ -104,7 +95,6 @@
             }
         } else {
             // User does not exist in the database
-            echo "You don't exist in our database, but you can create an account by clicking on the 'Sign Up!' button.";
             setcookie('user_type', 0, time() + (86400 * 30), '/');
 
         }
@@ -125,13 +115,11 @@
         
           $row = $result->fetch_assoc();
 
-          echo "here ".$row['User_Id'];
 
           $query = "DELETE FROM `users` WHERE `User_Id` = '$user_id_remove'";
           $result = $mysqli->query($query);
 
           if ($result) {
-            echo "User remove";
           } else {
             echo "Error : " . $mysqli->error;
           }
@@ -140,7 +128,6 @@
       }
 
       if (isset($_POST['account-submit'])) {
-        echo "im here !";
         $newName = $_POST['new_name'];
         $newAddress = $_POST['new_address'];
         $newCity = $_POST['new_city'];
@@ -153,7 +140,6 @@
         $updateQuery = "UPDATE `users` SET `Name`='$newName', `Address`='$newAddress', `City`='$newCity', `Postal_Code`='$newPostalCode', `Country`='$newCountry', `Telephone_Number`='$newTelephoneNumber' WHERE `User_Id`='$userId'";
       
         if ($mysqli->query($updateQuery)) {
-          echo "User information updated successfully.";
           $_SESSION['user_name'] = $newName;
           $_SESSION['user_address'] = $newAddress;
           $_SESSION['user_city'] = $newCity;
@@ -187,7 +173,6 @@
                             VALUES ('$mail', '$password', 0, 'To fill', 'To fill', 'To fill', 'To fill', 1)";
             
             if ($mysqli->query($insertQuery)) {
-                echo "User added successfully.";
             } else {
                 echo "Error detected.";
             }
@@ -197,7 +182,6 @@
       }
         
       if (isset($_POST['selling-submit'])) {
-          echo "je vend un produit !";
           $user_type = isset($_COOKIE['user_type']) ? $_COOKIE['user_type'] : '';
           $user_name = isset($_COOKIE['user_name']) ? $_COOKIE['user_name'] : '';
           $user_id = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : '';
@@ -222,7 +206,6 @@
           {
               $insertQuery = "INSERT INTO `product` (`Categorie`, `User_Id`, `Price`, `Product_Description`, `Product_Title`)
                             VALUES ('$productCategory', '$user_id', '$productPrice', '$productDescription', '$productTitle')";
-              echo $insertQuery;
 
               if ($mysqli->query($insertQuery)) {
                 $productId = $mysqli->insert_id;
@@ -282,10 +265,8 @@
 
       $user_id = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : '';
 
-      echo "USER ID FROM PAYMENT: " . $user_id;
 
       $sql = "SELECT * FROM users WHERE User_Id = $user_id";
-      echo $sql;
       $result = $mysqli->query($sql);
 
       if ($result->num_rows > 0) {
@@ -630,7 +611,6 @@
                 echo '<div>Welcome ' . $user_name . '</div>';
             }
             ?>
-            <!-- Filtre par catégorie -->
             <h2 class="filter-title">Categories</h2>
             <div>
                 <select id="categorie">
@@ -640,7 +620,6 @@
             </div>
             <hr>
 
-            <!-- Filtre par taille des t-shirts -->
             <div id="tshirt-size-filters" class=" ">
               <h3 class="filter-title">Size</h3>
               <label>
@@ -663,7 +642,6 @@
               </label>
             </div>
 
-            <!-- Filtre par taille des chaussures -->
             <div id="sneakers-size-filters" class="">
               <h3 class="filter-title">Size</h3>
               <label>
@@ -745,11 +723,8 @@
 
               $result = $mysqli->query($query);
         
-              // Vérifier si la requête a renvoyé des résultats
               if ($result->num_rows > 0) {
-                  // Parcourir les résultats de la requête
                 while ($row = $result->fetch_assoc()) {
-                    // Accéder aux valeurs des colonnes
                     $seller_id = $row["User_Id"];
                     $best_offer_id = $row["Best_Offer_Id"];
                     $categorie = $row["Categorie"];
@@ -763,8 +738,6 @@
                     $type = $row["Type"];
                     $file_name = $row["File_Name"];
         
-                    // Faire quelque chose avec les valeurs récupérées
-                    // Par exemple, les afficher à l'écran
                     echo '<div id="best_offer_'.$product_id .'" class="product-card">';
                     echo '<p class="product-seller-id">Seller ID : ' . $seller_id . '</p>';
                     echo '<div class="product-image">';
@@ -787,7 +760,7 @@
                   };
               }
               else {
-                  echo "Aucun résultat trouvé.";
+                  echo "no result found.";
               }
               ?>
               </div>
@@ -798,7 +771,6 @@
             <section id="buy_buy_now" class="buy_d_none">
             <div class="card-container">
 
-                <!--php to generate-->
               <?php
                 if(isset($_POST['Add_to_cart'])){
                   $product_id = $_POST['buy_now_product_id'];
@@ -807,10 +779,8 @@
 
                   $insertQuery = "INSERT INTO `cart` (`Quantity`,`Product_Id`,`User_Id`) 
                               VALUES (1,'$product_id','$user_id')";
-                  echo $insertQuery;
                   
                   if ($mysqli->query($insertQuery)) {
-                      echo "The product has been added to the cart";
                   } else {
                       echo "Error detected.";
       
@@ -820,12 +790,9 @@
                 $query = "SELECT *, product.Product_Id, image.File_Name FROM buy_now LEFT JOIN product ON buy_now.Product_Id = product.Product_Id LEFT JOIN tshirt ON product.Product_Id = tshirt.Product_Id LEFT JOIN sneakers ON product.Product_Id = sneakers.Product_Id LEFT JOIN `image` ON product.Product_Id = `image`.Product_Id";
                 
                 $result = $mysqli->query($query);
-                // Vérifier si la requête a renvoyé des résultats
+                
                 if ($result->num_rows > 0) {
-                    // Parcourir les résultats de la requête
                   while ($row = $result->fetch_assoc()) {
-                      // Accéder aux valeurs des colonnes
-                      //echo json_encode($row);
                       $buy_now_seller_id = $row["User_Id"];
                       $buy_now = $row["Best_Offer_Id"];
                       $buy_now_categorie = $row["Categorie"];
@@ -837,9 +804,7 @@
                       $buy_now_product_description = $row["Product_Description"];
                       $buy_now_product_title = $row["Product_Title"];
                       $buy_now_type = $row["Type"];
-                      $buy_now_file_name = $row["File_Name"];          
-                      // Faire quelque chose avec les valeurs récupérées
-                      // Par exemple, les afficher à l'écran
+                      $buy_now_file_name = $row["File_Name"];        
                       echo '<form method="POST">';
                       echo '<div id="buy_now_'.$buy_now_product_id .'"class="product-card">';
                           echo '<p class="product-seller-id">ID du vendeur: ' . $buy_now_seller_id . '</p>';
@@ -869,7 +834,6 @@
                     echo "Aucun résultat trouvé.";
                 }
               ?>
-              <!--php to generate-->
             </div>
             </Section>
             <section id="buy_anchor" class="buy_d_none">
@@ -879,12 +843,9 @@
 
               $result = $mysqli->query($query);
         
-              // Vérifier si la requête a renvoyé des résultats
               if ($result->num_rows > 0) {
-                  // Parcourir les résultats de la requête
                 while ($row = $result->fetch_assoc()) {
 
-                    // Accéder aux valeurs des colonnes
                     $auction_seller_id = $row["User_Id"];
                     $auction = $row["Auctions_Id"];
                     $auction_categorie = $row["Categorie"];
@@ -901,8 +862,6 @@
                     $auction_type = $row["Type"];
                     $auction_file_name = $row["File_Name"];
         
-                    // Faire quelque chose avec les valeurs récupérées
-                    // Par exemple, les afficher à l'écran
                     echo '<div id="auction_'.$auction_product_id .'" class="product-card">';
                     echo '<p class="product-seller-id">Seller ID: ' . $auction_seller_id . '</p>';
                     echo '<div class="product-image">';
@@ -935,7 +894,7 @@
                 };
               }
               else {
-                  echo "Aucun résultat trouvé.";
+                  echo "No result found.";
               }
               ?>
             </div>
@@ -1034,10 +993,8 @@
         if (isset($_POST['delete_submit'])) {
           $product_id = $_POST['product_id'];
 
-          // Supprimer le produit de la base de données
           $deleteQuery = "DELETE FROM product WHERE Product_Id = '$product_id'";
           if ($mysqli->query($deleteQuery)) {
-              echo 'Product deleted successfully.';
           } else {
               echo 'Error deleting product.';
           }
@@ -1052,7 +1009,6 @@
           $query = "SELECT p.Product_Title, p.Product_Id, p.Categorie, p.Price, p.User_Id FROM product p WHERE p.User_Id = '$user_id'";
         }
 
-        // Récupérer les produits de l'utilisateur
         
         $result = $mysqli->query($query);
 
@@ -1123,12 +1079,9 @@
                 while ($row = $result->fetch_assoc()) {
                     $product_id = $row["Product_Id"];
                     
-                    // Vérifier si le produit existe déjà dans le tableau
                     if (array_key_exists($product_id, $cartItems)) {
-                        // Augmenter la quantité si le produit existe déjà
                         $cartItems[$product_id]["Quantity"] += (int)$row["Quantity"];
                     } else {
-                        // Ajouter une nouvelle entrée pour le produit s'il n'existe pas déjà
                         $cartItems[$product_id] = array(
                             "Product_Id" => $product_id,
                             "User_Id" => $row["User_Id"],
@@ -1140,12 +1093,10 @@
                         );
                     }
             
-                    // Ajouter le prix du produit à la valeur totale
                     $totalPrice += (float)$row["Price"] * (int)$row["Quantity"];
                 }
             }
             
-            // Afficher les produits regroupés dans une seule carte
             foreach ($cartItems as $item) {
                 echo '<div class="cart-product">';
                 echo '<div class="cart-product-row">';
@@ -1176,7 +1127,6 @@
             if (isset($_POST['delete_into_cart'])) {
               $product_id = $_POST['product_id'];
     
-              // Supprimer le produit de la base de données
               $deleteQuery = "DELETE FROM cart WHERE Product_Id = '$product_id'";
               $mysqli->query($deleteQuery);
               echo POST_prod;
@@ -1201,20 +1151,20 @@
             <option value="PayPal">PayPal</option>
           </select>
 
-          <label class="payment-label" for="payment-card-number">Numéro de carte:</label>
+          <label class="payment-label" for="payment-card-number">Card Number:</label>
           <input class="payment-input" type="text" id="payment-card-number" name="payment-card-number">
 
-          <label class="payment-label" for="payment-card-name">Nom affiché sur la carte:</label>
+          <label class="payment-label" for="payment-card-name">Name display on the card:</label>
           <input class="payment-input" type="text" id="payment-card-name" name="payment-card-name">
 
-          <label class="payment-label" for="payment-card-expiration">Date d'expiration de la carte:</label>
+          <label class="payment-label" for="payment-card-expiration">Expiration date:</label>
           <input class="payment-input" type="text" id="payment-card-expiration" name="payment-card-expiration">
 
-          <label class="payment-label" for="payment-security-code">Code de sécurité:</label>
+          <label class="payment-label" for="payment-security-code">Security Code:</label>
           <input class="payment-input" type="text" id="payment-security-code" name="payment-security-code">
 
           <button  class="return-order-button" type="button">Go back</button>
-          <button  class="payment-button" type="submit" name="payment-submit">Payer</button>
+          <button  class="payment-button" type="submit" name="payment-submit">Pay</button>
         </form>
 
 
