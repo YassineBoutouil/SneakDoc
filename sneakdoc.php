@@ -928,31 +928,33 @@
                     // Faire quelque chose avec les valeurs récupérées
                     // Par exemple, les afficher à l'écran
                     echo '<div id="auction_'.$auction_product_id .'" class="product-card">';
-                        echo '<p class="product-seller-id">ID du vendeur: ' . $auction_seller_id . '</p>';
-                        echo '<div class="product-image">';
-                        echo    '<img src="image/' . $auction_file_name . '" alt="'.$auction_file_name.'">';
-                        echo '</div>';
-                        echo '<div class="product-details">';
-                            echo '<h2 class="product-title">' . $auction_product_title . '</h2>';
-                            echo '<p name="product_id" value="'.$buy_now_product_id.'"class="product-code">Code du produit: ' . $auction_product_id . '</p>';
-                            echo '<div class="quantity-section">';
-                            echo '<div class="date-section">';
-                            echo '<span class="starting-date">'.$auction_starting_date.'</span><br>';  
-                            echo '<span class="to-date">To</span><br>';  
-                            echo '<span class="finish-date">'.$auction_finish_date.'</span>';
-                            echo '</div>';
-                            echo '</div>';
-                            echo '<h5 class="product-price">';
-                            echo '<span class="price-label">Initial-price : </span>';
-                            echo '<span id="base_price_'.$auction_price.'" class="initial-price">' . $auction_price . '</span>';
-                            echo '</h5>';
-                            echo '<h5 class="product-price">';
-                            echo '<span class="price-label">Current price : </span>';
-                            echo '<span class="current-price">' . $auction_current_price . '</span>';
-                            echo '</h5>';
-                            echo '<button class="make-anchor">Make an offer</button>';
-
-                        echo '</div>';
+                    echo '<p class="product-seller-id">ID du vendeur: ' . $auction_seller_id . '</p>';
+                    echo '<div class="product-image">';
+                    echo    '<img src="image/' . $auction_file_name . '" alt="'.$auction_file_name.'">';
+                    echo '</div>';
+                    echo '<div class="product-details">';
+                    echo '<h2 class="product-title">' . $auction_product_title . '</h2>';
+                    echo '<p name="product_id" value="'.$buy_now_product_id.'"class="product-code">Code du produit: ' . $auction_product_id . '</p>';
+                    echo '<div class="quantity-section">';
+                    echo '<div class="date-section">';
+                    echo '<span class="starting-date">'.$auction_starting_date.'</span><br>';  
+                    echo '<span class="to-date">To</span><br>';  
+                    echo '<span class="finish-date">'.$auction_finish_date.'</span>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '<h5 class="product-price">';
+                    echo '<span class="price-label">Initial-price : </span>';
+                    echo '<span id="base_price_'.$auction_price.'" class="initial-price">' . $auction_price . '</span>';
+                    echo '</h5>';
+                    echo '<h5 class="product-price">';
+                    echo '<span class="price-label">Current price : </span>';
+                    echo '<span class="current-price">' . $auction_current_price . '</span>';
+                    echo '<form method="POST">';
+                    echo '<input type="number" id="negotiation-input" class="negotiation-input" step="0.01" min="0" placeholder="Entrez votre prix">';
+                    echo '</h5>';
+                    echo '<button class="make-anchor">Make an offer</button>';
+                    echo '</form>';
+                    echo '</div>';
                     echo '</div></br>';
                 };
               }
@@ -961,6 +963,7 @@
               }
               ?>
             </div>
+
             </Section>
           </section>
         </section>
