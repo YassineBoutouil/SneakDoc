@@ -1,8 +1,6 @@
 # SneakDoc
  Web Projet London
 
-TO DO : déconnexion --> avoir accès au sign-up et données les mêmes accès à ce moment la que lorsqu'on vient de se connecter au site
-
 For our project you will be able to use the sql script that will initialise the db, you will have buyer / seller and administrator accounts at your disposal. 
 
 Admin account: yassineadmin@gmail.com
@@ -34,6 +32,7 @@ As administrator, you'll have access to all the seller's functionalities, but yo
 
 as administrator, when you want to remove a product from the market, you'll be able to see absolutely all the products in the database.
 
+you can buy a buy_now product. You just have too add the product to your cart and then confirm the payment directly in the cart part and then if the paiement information of the current user correspond in the database the product is suppress
 
 something we failed to do: 
 
