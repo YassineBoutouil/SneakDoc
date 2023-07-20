@@ -1061,7 +1061,7 @@
             $totalPrice = 0;
             $cartItems = array();
             
-            $query = "SELECT cart.Product_Id, cart.User_Id, cart.Quantity, cart.Cart_Id, product.Product_Title, product.Price, 
+            $query = "SELECT cart.Product_Id, cart.User_Id, cart.Quantity, cart.Cart_Id, product.Product_Title, product.Price, image.File_Name, 
                           CASE 
                               WHEN sneakers.Size IS NOT NULL THEN sneakers.Size
                               ELSE tshirt.Size
@@ -1084,6 +1084,7 @@
                     } else {
                         $cartItems[$product_id] = array(
                             "Product_Id" => $product_id,
+                            "File_name" => $row["File_Name"],
                             "User_Id" => $row["User_Id"],
                             "Quantity" => (int)$row["Quantity"],
                             "Cart_Id" => $row["Cart_Id"],
@@ -1092,7 +1093,7 @@
                             "Size" => $row["Size"]
                         );
                     }
-            
+                    
                     $totalPrice += (float)$row["Price"] * (int)$row["Quantity"];
                 }
             }
@@ -1101,7 +1102,7 @@
                 echo '<div class="cart-product">';
                 echo '<div class="cart-product-row">';
                 echo '<div class="cart-product-col">';
-                echo '<img class="cart-product-image" src="image/64b6ae7956fe8.png" alt="Product Image">';
+                echo '<img class="cart-product-image" src="image/'.$item["File_name"].'" alt="Product Image">';
                 echo '</div>';
                 echo '<div class="cart-product-col">';
                 echo '<div class="cart-product-id">Product ID : '.$item["Product_Id"].'</div>';
