@@ -1,5 +1,5 @@
 # SneakDoc
- Web Projet London
+ Web Projet London (Thomas Dorby and Yassine Boutouil))
 
 For our project you will be able to use the sql script that will initialise the db, you will have buyer / seller and administrator accounts at your disposal. 
 
@@ -36,7 +36,7 @@ you can buy a buy_now product. You just have too add the product to your cart an
 
 something we failed to do: 
 
-Sort products in the purchase category / Auctions and Best_Offer
+Sort products in the purchase category / Auctions and Best_Offer 
 
 details : 
 
