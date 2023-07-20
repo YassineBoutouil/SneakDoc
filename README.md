@@ -34,12 +34,6 @@ As administrator, you'll have access to all the seller's functionalities, but yo
 
 as administrator, when you want to remove a product from the market, you'll be able to see absolutely all the products in the database.
 
-Translated with www.DeepL.com/Translator (free version)
-
-further clarification: 
-
- (ajout au panier et achat ?)
-
 
 something we failed to do: 
 
