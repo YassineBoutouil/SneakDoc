@@ -36,7 +36,7 @@ you can buy a buy_now product. You just have too add the product to your cart an
 
 something we failed to do: 
 
-Sort products in the purchase category
+Sort products in the purchase category / Auctions and Best_Offer
 
 details : 
 
