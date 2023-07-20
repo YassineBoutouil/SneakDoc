@@ -1183,9 +1183,7 @@
                 echo '</div>';
                 echo '<div class="cart-product-col">';
                 echo '<div class="quantity-buttons">';
-                echo '<button class="quantity-button minus">-</button>';
-                echo '<input type="number" class="cart-product-quantity" value="'.$item["Quantity"].'">';
-                echo '<button class="quantity-button plus">+</button>';
+                echo '<div class="cart-product-quantity">'.$item["Quantity"].' units</div>';
                 echo '</div>';
                 echo '<div class="cart-product-size">Size: '.$item["Size"].'</div>';
                 echo '<div class="cart-product-price">Price: '.$item["Price"].' Pounds</div>';

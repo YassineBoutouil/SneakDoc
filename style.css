@@ -743,7 +743,8 @@ margin-bottom: 5px;
 .cart-product-id,
 .cart-product-title,
 .cart-product-size,
-.cart-product-price {
+.cart-product-price,
+.cart-product-quantity {
     font-weight: bold;
     color: #e53935;
 }
