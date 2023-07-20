@@ -1124,53 +1124,79 @@
         <?php
             $element = 0;
             $totalPrice = 0;
+            $cartItems = array();
+            
             $query = "SELECT cart.Product_Id, cart.User_Id, cart.Quantity, cart.Cart_Id, product.Product_Title, product.Price, 
-              CASE 
-                  WHEN sneakers.Size IS NOT NULL THEN sneakers.Size
-                  ELSE tshirt.Size
-              END AS Size
-              FROM cart 
-              LEFT JOIN product ON product.Product_Id = cart.Product_Id 
-              LEFT JOIN image on image.Product_Id = cart.Product_Id 
-              LEFT JOIN buy_now ON buy_now.Product_Id = cart.Product_Id 
-              LEFT JOIN sneakers ON cart.Product_Id = sneakers.Product_Id 
-              LEFT JOIN tshirt ON cart.Product_Id = tshirt.Product_Id
-              WHERE sneakers.Size IS NOT NULL OR tshirt.Size IS NOT NULL";
-              $result = $mysqli->query($query);
-
-            if($result->num_rows > 0){
-              while($row = $result->fetch_assoc()){
-                  echo json_encode($row);
-                  echo'<div class="cart-product">';
-                  echo'<div class="cart-product-row">';
-                  echo'<div class="cart-product-col">';
-                  echo'<img class="cart-product-image" src="image/64b6ae7956fe8.png" alt="Product Image">';
-                  echo'</div>';
-                  echo'<div class="cart-product-col">';
-                  echo'<div class="cart-product-id">Product ID : '.$row["Product_Id"].'</div>';
-                  echo'<div class="cart-product-title">Product Title : '.$row["Product_Title"].'</div>';
-                  echo'</div>';
-                  echo'<div class="cart-product-col">';
-                  echo'<div class="quantity-buttons">';
-                  echo'<button class="quantity-button minus">-</button>';
-                  echo'<input type="number" class="cart-product-quantity" value="'.$row["Quantity"].'">';
-                  echo'<button class="quantity-button plus">+</button>';
-                  echo'</div>';
-                  echo'<div class="cart-product-size">Size: '.$row["Size"].'</div>';
-                  echo'<div class="cart-product-price">Price: '.$row["Price"].' Pounds</div>';
-                  echo'</div>';
-                  echo'<div class="cart-product-col">';
-                  echo '<form method="post">';
-                  echo'<button name="delete_into_cart" class="delete-button">Delete</button>';
-                  echo '<input type="hidden" name="product_id" value="' . $row["Product_Id"]. '">';
-                  echo'</form>';
-                  echo'</div>';
-                  echo'</div>';
-                  echo'</div>';
-                  $totalPrice += (float)$row["Price"] * (int)$row["Quantity"];
-              }
+                          CASE 
+                              WHEN sneakers.Size IS NOT NULL THEN sneakers.Size
+                              ELSE tshirt.Size
+                          END AS Size
+                          FROM cart 
+                          LEFT JOIN product ON product.Product_Id = cart.Product_Id 
+                          LEFT JOIN image on image.Product_Id = cart.Product_Id 
+                          LEFT JOIN buy_now ON buy_now.Product_Id = cart.Product_Id 
+                          LEFT JOIN sneakers ON cart.Product_Id = sneakers.Product_Id 
+                          LEFT JOIN tshirt ON cart.Product_Id = tshirt.Product_Id
+                          WHERE sneakers.Size IS NOT NULL OR tshirt.Size IS NOT NULL";
+            $result = $mysqli->query($query);
+            
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $product_id = $row["Product_Id"];
+                    
+                    // Vérifier si le produit existe déjà dans le tableau
+                    if (array_key_exists($product_id, $cartItems)) {
+                        // Augmenter la quantité si le produit existe déjà
+                        $cartItems[$product_id]["Quantity"] += (int)$row["Quantity"];
+                    } else {
+                        // Ajouter une nouvelle entrée pour le produit s'il n'existe pas déjà
+                        $cartItems[$product_id] = array(
+                            "Product_Id" => $product_id,
+                            "User_Id" => $row["User_Id"],
+                            "Quantity" => (int)$row["Quantity"],
+                            "Cart_Id" => $row["Cart_Id"],
+                            "Product_Title" => $row["Product_Title"],
+                            "Price" => (float)$row["Price"],
+                            "Size" => $row["Size"]
+                        );
+                    }
+            
+                    // Ajouter le prix du produit à la valeur totale
+                    $totalPrice += (float)$row["Price"] * (int)$row["Quantity"];
+                }
             }
-
+            
+            // Afficher les produits regroupés dans une seule carte
+            foreach ($cartItems as $item) {
+                echo json_encode($item);
+                echo '<div class="cart-product">';
+                echo '<div class="cart-product-row">';
+                echo '<div class="cart-product-col">';
+                echo '<img class="cart-product-image" src="image/64b6ae7956fe8.png" alt="Product Image">';
+                echo '</div>';
+                echo '<div class="cart-product-col">';
+                echo '<div class="cart-product-id">Product ID : '.$item["Product_Id"].'</div>';
+                echo '<div class="cart-product-title">Product Title : '.$item["Product_Title"].'</div>';
+                echo '</div>';
+                echo '<div class="cart-product-col">';
+                echo '<div class="quantity-buttons">';
+                echo '<button class="quantity-button minus">-</button>';
+                echo '<input type="number" class="cart-product-quantity" value="'.$item["Quantity"].'">';
+                echo '<button class="quantity-button plus">+</button>';
+                echo '</div>';
+                echo '<div class="cart-product-size">Size: '.$item["Size"].'</div>';
+                echo '<div class="cart-product-price">Price: '.$item["Price"].' Pounds</div>';
+                echo '</div>';
+                echo '<div class="cart-product-col">';
+                echo '<form method="post">';
+                echo '<button name="delete_into_cart" class="delete-button">Delete</button>';
+                echo '<input type="hidden" name="product_id" value="' . $item["Product_Id"]. '">';
+                echo '</form>';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+            }
+            
             if (isset($_POST['delete_into_cart'])) {
               $product_id = $_POST['product_id'];
     
@@ -1179,8 +1205,9 @@
               $mysqli->query($deleteQuery);
               
             }
+            
             echo '<div id="final-price">Final Price : <input id="Final_Price" value="' . $totalPrice . '"></div>';
-        ?>
+            ?>
         
         <input id="cart_order_confirmation" type="submit" value="Pay">      
       </center>
