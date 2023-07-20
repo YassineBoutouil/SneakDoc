@@ -99,6 +99,7 @@ $(document).ready(function() {
         $(this).removeClass('active');
         $('#nav_sign_in').addClass('active');
         $('#nav_sign_up').addClass('active');
+        $('#nav_disconnect').addClass('active');
 
       }
     });
