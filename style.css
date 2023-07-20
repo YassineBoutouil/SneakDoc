@@ -173,7 +173,7 @@ margin-bottom: 5px;
     font-weight: bold;
 }
 
-.add-to-cart-button, .negotiation-button, .payment-button, .return-order-button, #cart_order_confirmation, .delete-button, .admin-userbutton, .admin-removeusersubmit, .save-button, #selling-submit, .make-anchor, #login-submit{
+.add-to-cart-button, .negotiation-button, .payment-button, .return-order-button, #cart_order_confirmation, .delete-button, .admin-userbutton, .admin-removeusersubmit, .save-button, #selling-submit, .make-anchor, #login-submit, #sign-up-submit{
     width: 125px;
     padding: 10px;
     font-size: 14px;
@@ -331,15 +331,6 @@ margin-bottom: 5px;
     margin-top: 5px;
 }
 
-#sign-up-submit{
-    margin-top: 20px;
-    width: 20%;
-    height: 60px;
-    font-size: 2em;
-    font-weight: 600;
-    background-color: var(--red);
-    color: var(--white);
-}
 
 #form-group {
     display: grid;

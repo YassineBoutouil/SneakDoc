@@ -426,7 +426,7 @@
           </div>
         </div>
         <center>
-          <input type="submit" value="Save" id="account-submit" name="account-submit">
+          <input type="submit" value="Save" id="account-submit" name="account-submit" class="save-button">
         </center>
       </form>
     </section>
