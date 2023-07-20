@@ -1,8 +1,6 @@
 # SneakDoc
  Web Projet London
 
-TO DO : déconnexion --> avoir accès au sign-up et données les mêmes accès à ce moment la que lorsqu'on vient de se connecter au site
-
 For our project you will be able to use the sql script that will initialise the db, you will have buyer / seller and administrator accounts at your disposal. 
 
 Admin account: yassineadmin@gmail.com
