@@ -807,7 +807,7 @@
                       $buy_now_file_name = $row["File_Name"];        
                       echo '<form method="POST">';
                       echo '<div id="buy_now_'.$buy_now_product_id .'"class="product-card">';
-                          echo '<p class="product-seller-id">Seller ID : ' . $buy_now_seller_id . '</p>';
+                          echo '<p class="product-seller-id">Seller ID: ' . $buy_now_seller_id . '</p>';
                           echo '<div class="product-image">';
                           echo    '<img src="image/' . $buy_now_file_name . '" alt="'.$buy_now_file_name.'">';
                           echo '</div>';
@@ -1141,9 +1141,9 @@
     </section>
       <section id="cart_payment" class="cart_d_none two_parts overflow">
       <div class="payment-container">
-        <h1 class="payment-title">Page de paiement</h1>
+        <h1 class="payment-title">Paiement page</h1>
         <form method="POST">
-          <label class="payment-label" for="payment-type">Type de carte de paiement:</label>
+          <label class="payment-label" for="payment-type">Card type:</label>
           <select class="payment-select" id="payment-type" name="payment-type">
             <option value="Visa">Visa</option>
             <option value="MasterCard">MasterCard</option>
