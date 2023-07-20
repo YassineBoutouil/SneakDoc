@@ -493,14 +493,14 @@ margin-bottom: 5px;
 #file-upload-label {
     margin: 0;
 }
-  
+
 #selling-productimg:hover {
     background-color: var(--white-cream);
 }
 
 #selling-removetable{
     border-collapse: collapse;
-    box-shadow: 0 0 10px red; 
+    box-shadow: 0 0 10px red;
     margin: 0 auto; 
 }
 
