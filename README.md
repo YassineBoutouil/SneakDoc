@@ -17,7 +17,7 @@ For Sign-in, you must select whether you are going to connect as a seller, buyer
 
 Once you have entered the site with the different accounts you can see that the navigation bar for the different types of user is different. A buyer only has access to the functions that correspond to him. A seller is like a buyer but he has access to the "sale" category and the admin has access to everything that the seller has access to with the addition of the "Admin" category.
 
-as users: you will be able to access the purchase category, where you can see all the products stored in the site's database. We have also enabled the use of images. TO CHANGE ACCORDING TO PROGRESS
+as users: you will be able to access the purchase category, where you can see all the products stored in the site's database. We have also enabled the use of images. You can add a product to a "buy_now" product in your cart and pay for it
 
 You also have the right to consult your personal details (address, first and last name, telephone number, etc.). If you decide to change them, simply change them in the text zone and the database will automatically update to the user's line. (this feature is available for all users of all types)
 you can also log out by clicking on the logout button (also available for all users).
@@ -36,7 +36,7 @@ you can buy a buy_now product. You just have too add the product to your cart an
 
 something we failed to do: 
 
-Sort products in the purchase category
+Sort products in the purchase category / Auctions and Best_Offer
 
 details : 
 

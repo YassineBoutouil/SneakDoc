@@ -488,3 +488,4 @@ $(document).ready(function() {
   });
 
 });
+
