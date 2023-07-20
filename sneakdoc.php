@@ -1123,8 +1123,20 @@
 
         <?php
             $element = 0;
-          	$query = "SELECT cart.Product_Id, cart.User_Id, cart.Quantity, cart.Cart_Id FROM cart LEFT JOIN product ON product.Product_Id = cart.Product_Id LEFT JOIN image on image.Product_Id = cart.Product_Id LEFT JOIN buy_now ON buy_now.Product_Id = cart.Product_Id";
-            $result = $mysqli->query($query);
+            $totalPrice = 0;
+            $query = "SELECT cart.Product_Id, cart.User_Id, cart.Quantity, cart.Cart_Id, product.Product_Title, product.Price, 
+              CASE 
+                  WHEN sneakers.Size IS NOT NULL THEN sneakers.Size
+                  ELSE tshirt.Size
+              END AS Size
+              FROM cart 
+              LEFT JOIN product ON product.Product_Id = cart.Product_Id 
+              LEFT JOIN image on image.Product_Id = cart.Product_Id 
+              LEFT JOIN buy_now ON buy_now.Product_Id = cart.Product_Id 
+              LEFT JOIN sneakers ON cart.Product_Id = sneakers.Product_Id 
+              LEFT JOIN tshirt ON cart.Product_Id = tshirt.Product_Id
+              WHERE sneakers.Size IS NOT NULL OR tshirt.Size IS NOT NULL";
+              $result = $mysqli->query($query);
 
             if($result->num_rows > 0){
               while($row = $result->fetch_assoc()){
@@ -1135,8 +1147,8 @@
                   echo'<img class="cart-product-image" src="image/64b6ae7956fe8.png" alt="Product Image">';
                   echo'</div>';
                   echo'<div class="cart-product-col">';
-                  echo'<div class="cart-product-id">Product ID: '.$row["Product_Id"].'</div>';
-                  echo'<div class="cart-product-title">Product Title</div>';
+                  echo'<div class="cart-product-id">Product ID : '.$row["Product_Id"].'</div>';
+                  echo'<div class="cart-product-title">Product Title : '.$row["Product_Title"].'</div>';
                   echo'</div>';
                   echo'<div class="cart-product-col">';
                   echo'<div class="quantity-buttons">';
@@ -1144,8 +1156,8 @@
                   echo'<input type="number" class="cart-product-quantity" value="'.$row["Quantity"].'">';
                   echo'<button class="quantity-button plus">+</button>';
                   echo'</div>';
-                  echo'<div class="cart-product-size">Size: M</div>';
-                  echo'<div class="cart-product-price">Price: $19.99</div>';
+                  echo'<div class="cart-product-size">Size: '.$row["Size"].'</div>';
+                  echo'<div class="cart-product-price">Price: '.$row["Price"].' Pounds</div>';
                   echo'</div>';
                   echo'<div class="cart-product-col">';
                   echo '<form method="post">';
@@ -1155,7 +1167,7 @@
                   echo'</div>';
                   echo'</div>';
                   echo'</div>';
-                  echo'<div id="final-price">Final Price: $19.99</div>';
+                  $totalPrice += (float)$row["Price"] * (int)$row["Quantity"];
               }
             }
 
@@ -1167,7 +1179,9 @@
               $mysqli->query($deleteQuery);
               
             }
+            echo '<div id="final-price">Final Price : <input id="Final_Price" value="' . $totalPrice . '"></div>';
         ?>
+        
         <input id="cart_order_confirmation" type="submit" value="Pay">      
       </center>
     </section>
