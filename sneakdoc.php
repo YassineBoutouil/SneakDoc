@@ -235,7 +235,6 @@
                     $insertSneakersQuery = "INSERT INTO `sneakers` (`Size`, `Color`, `Product_Id`, `Type`) 
                                             VALUES ('$productSize', '$productColor', '$productId' , '$productType')";
                     $mysqli->query($insertSneakersQuery);
-                    echo "je mets à jour sneakers avec cette requete : " . $insertSneakersQuery;
                 }
   
                 if ($productImage) {
@@ -249,9 +248,7 @@
                     if (move_uploaded_file($tempName, $uploadPath)) {
                         $insertImageQuery = "INSERT INTO `image` (`Product_Id`, `File_Name`) VALUES ('$productId', '$newFileName')";
                         $mysqli->query($insertImageQuery);
-                        echo "Le fichier a été téléchargé et les informations ont été ajoutées avec succès.";
                     } else {
-                        echo "Une erreur s'est produite lors du téléchargement du fichier.";
                         die();
                     }
                 }
@@ -260,27 +257,16 @@
                     $insertAnchorQuery = "INSERT INTO `auctions` (`Categorie`, `Size`, `Color`, `Starting_Date`, `Finish_Date`, `Price`, `Product_Id`)
                                           VALUES ('$productCategory', '$productSize', '$productColor', NOW(), '$productEndDate', '$productPrice', '$productId')";
                     $mysqli->query($insertAnchorQuery);
-                    echo "Product added successfully.";
                 } elseif ($productSellType == 'Buy_Now') {
                     $insertBuyNowQuery = "INSERT INTO `buy_now` (`Categorie`, `Size`, `Color`, `Price`, `Product_Id`)
                                           VALUES ('$productCategory', '$productSize', '$productColor', '$productPrice', '$productId')";
                     $mysqli->query($insertBuyNowQuery);
-                    echo "Product added successfully.";
                 } elseif ($productSellType == 'Best_Offer') {
                     $insertBestOfferQuery = "INSERT INTO `best_offer` (`Categorie`, `Size`, `Color`, `Proposition_Price`, `Product_Id`)
                                             VALUES ('$productCategory', '$productSize', '$productColor', '$productPrice', '$productId')";
                     $mysqli->query($insertBestOfferQuery);
-                    echo "Product added successfully.";
-                } else {
-                    echo "Error!";
                 }
               } 
-              else {
-                echo "Erreur lors de l'insertion du produit dans la base de données : " . $mysqli->error;
-              }
-            }
-            else{
-              echo "Veuillez remplir tous les champs et télécharger une image.";
             }
           
         }
@@ -306,9 +292,7 @@
         $row = $result->fetch_assoc();
 
         if ($row['Payment_Type'] === $paymentType && $row['Card_Number'] === $cardNumber && $row['Card_Name'] === $cardName && $row['Card_Expiration_Date'] === $cardExpiration && $row['Security_Code'] === $securityCode) {
-            echo "Payment successful!";
 
-            echo $user_id;
 
             $delete_query = "DELETE cart, product, sneakers, tshirt, auctions, buy_now, best_offer
             FROM cart
@@ -320,7 +304,6 @@
             LEFT JOIN best_offer ON cart.Product_Id = best_offer.Product_Id
             WHERE cart.User_Id = $user_id;";
 
-            echo $delete_query;
 
             $mysqli->query($delete_query);
         } else {
@@ -823,9 +806,6 @@
                   $product_id = $_POST['buy_now_product_id'];
                   $user_id = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : '';
                   $user_type = isset($_COOKIE['user_type']) ? $_COOKIE['user_type'] : '';
-                  echo $user_type;
-                  echo $product_id;
-                  echo $user_id;
 
                   $insertQuery = "INSERT INTO `cart` (`Quantity`,`Product_Id`,`User_Id`) 
                               VALUES (1,'$product_id','$user_id')";
@@ -1171,7 +1151,6 @@
             
             // Afficher les produits regroupés dans une seule carte
             foreach ($cartItems as $item) {
-                echo json_encode($item);
                 echo '<div class="cart-product">';
                 echo '<div class="cart-product-row">';
                 echo '<div class="cart-product-col">';
@@ -1207,7 +1186,7 @@
               
             }
             
-            echo '<div id="final-price">Final Price : <input id="Final_Price" value="' . $totalPrice . '"></div>';
+            echo '<center><div id="final-price" class="final_price_order">Final Price : <span id="Final_Price">' . $totalPrice . '</span></div><center>';
             ?>
         
         <input id="cart_order_confirmation" type="submit" value="Pay">      
